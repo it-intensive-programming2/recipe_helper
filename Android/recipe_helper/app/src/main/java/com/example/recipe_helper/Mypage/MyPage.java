@@ -1,4 +1,4 @@
-package com.example.recipe_helper;
+package com.example.recipe_helper.Mypage;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,11 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class MyPage extends Fragment {
+import com.example.recipe_helper.R;
 
-    private WebView mWebView;
-    private WebSettings mWebSettings;
-    private String homepage;
+public class MyPage extends Fragment {
 
     @Nullable
     @Override

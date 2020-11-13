@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.recipe_helper.Home.Home;
+import com.example.recipe_helper.Mypage.MyPage;
+import com.example.recipe_helper.Refrigerator.Refrigerator;
+import com.example.recipe_helper.Scrap.Scrap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navigation;
     private Home home;
     private MyPage my_page;
+    private Refrigerator refrigerator;
+    private Scrap scrap;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -26,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.item_home:
                     replaceFragment(home);
+                    return true;
+                case R.id.item_fridge:
+                    replaceFragment(refrigerator);
+                    return true;
+                case R.id.item_scrap:
+                    replaceFragment(scrap);
                     return true;
                 case R.id.item_mypage:
                     replaceFragment(my_page);
@@ -41,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         home = new Home();
+        refrigerator = new Refrigerator();
+        scrap = new Scrap();
         my_page = new MyPage();
 
         navigation = findViewById(R.id.nav_bar);
