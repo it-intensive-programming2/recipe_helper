@@ -1,4 +1,4 @@
-package com.example.recipe_helper;
+package com.example.recipe_helper.Home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.recipe_helper.Adapter.HomeRecyclerViewAdapter;
-import com.example.recipe_helper.Adapter.ViewPageAdapter;
-import com.example.recipe_helper.Dataframe.DoubleHomeRecipeFrame;
-import com.example.recipe_helper.Dataframe.HomeRecipeFrame;
+import com.example.recipe_helper.Home.Adapter.HomeRecyclerViewAdapter;
+import com.example.recipe_helper.Home.Adapter.ViewPageAdapter;
+import com.example.recipe_helper.Home.Dataframe.DoubleHomeRecipeFrame;
+import com.example.recipe_helper.Home.Dataframe.HomeRecipeFrame;
+import com.example.recipe_helper.MainActivity;
+import com.example.recipe_helper.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

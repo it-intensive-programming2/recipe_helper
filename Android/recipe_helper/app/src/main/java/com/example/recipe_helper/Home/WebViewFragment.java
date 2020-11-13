@@ -1,4 +1,4 @@
-package com.example.recipe_helper;
+package com.example.recipe_helper.Home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,8 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.recipe_helper.R;
 
 public class WebViewFragment extends Fragment {
 

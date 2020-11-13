@@ -1,4 +1,4 @@
-package com.example.recipe_helper.Dataframe;
+package com.example.recipe_helper.Home.Dataframe;
 
 public class DoubleHomeRecipeFrame {
     public HomeRecipeFrame recipe1;

@@ -1,4 +1,4 @@
-package com.example.recipe_helper.Adapter;
+package com.example.recipe_helper.Home.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.recipe_helper.Dataframe.DoubleHomeRecipeFrame;
+import com.example.recipe_helper.Home.Dataframe.DoubleHomeRecipeFrame;
 import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
