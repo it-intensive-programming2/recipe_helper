@@ -68,7 +68,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 }
             });
 
-            image1.setOnClickListener(new View.OnClickListener() {
+            image2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onItemSelected(v, recipe_url2);
