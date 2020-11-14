@@ -1,6 +1,7 @@
 package com.example.recipe_helper.Scrap;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.recipe_helper.Home.Adapter.HomeRecyclerViewAdapter;
 import com.example.recipe_helper.R;
 
@@ -24,8 +26,10 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
 
     private ArrayList<like_recipe> list;
     private OnListItemSelectedInterface mlistener;
+    private Context context;
 
-    public ScrapRecyclerViewAdapter(ArrayList<like_recipe> list, OnListItemSelectedInterface mlistener) {
+    public ScrapRecyclerViewAdapter(Context context, ArrayList<like_recipe> list, OnListItemSelectedInterface mlistener) {
+        this.context = context;
         this.list = list;
         this.mlistener = mlistener;
     }
@@ -55,14 +59,13 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
         protected TextView scrap_recipe_name;
         protected TextView scrap_recipe_owner;
         protected LinearLayout link;
-        protected boolean scraped = false;
 
 
         public Holder(View view) {
             super(view);
             this.scrap_img = (ImageView) view.findViewById(R.id.scrap_img);
             this.scrap_star = (ImageView) view.findViewById(R.id.scrap_star);
-            this.scrap_recipe_name = (TextView) view.findViewById(R.id.recipe_name);
+            this.scrap_recipe_name = (TextView) view.findViewById(R.id.scrap_recipe_name);
             this.scrap_recipe_owner = (TextView) view.findViewById(R.id.scrap_recipe_owner);
             this.link = (LinearLayout) view.findViewById(R.id.scrap_layout);
 
@@ -78,11 +81,10 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
 
     @Override
     public void onBindViewHolder(@NonNull ScrapRecyclerViewAdapter.Holder holder, final int position) {
-        holder.scrap_img.setImageResource(list.get(position).getScrap_img());
-        holder.scrap_star.setImageResource(list.get(position).getScrap_btn());
+
+        Glide.with(context).load(list.get(position).getScrap_img()).into(holder.scrap_img);
         holder.scrap_recipe_name.setText(list.get(position).getScrap_recipe_name());
         holder.scrap_recipe_owner.setText(list.get(position).getScrap_recipe_owner());
-        //
 
         holder.itemView.setTag(position);
     }

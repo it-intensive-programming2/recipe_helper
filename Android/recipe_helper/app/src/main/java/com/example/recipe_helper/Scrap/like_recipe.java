@@ -4,18 +4,16 @@ import android.widget.LinearLayout;
 
 public class like_recipe {
 
-    private int scrap_img; // 음식사진
-    private int scrap_btn; // 별
+    private String scrap_img; // 음식사진
     private String scrap_recipe_name; // 레시피 명
     private String scrap_recipe_owner; // 레시피 작성자
     private String link; // 링크
 
-    public like_recipe(int scrap_img, int scrap_btn, String scrap_recipe_name, String scrap_recipe_owner, String link) {
+    public like_recipe(String scrap_img, String scrap_recipe_name, String scrap_recipe_owner, String link) {
         this.scrap_img = scrap_img;
-        this.scrap_btn = scrap_btn;
         this.scrap_recipe_name = scrap_recipe_name;
         this.scrap_recipe_owner = scrap_recipe_owner;
-        this.link =  link;
+        this.link = link;
     }
 
     public String getLink() {
@@ -26,19 +24,11 @@ public class like_recipe {
         this.link = link;
     }
 
-    public int getScrap_btn() {
-        return scrap_btn;
-    }
-
-    public void setScrap_btn(int scrap_btn) {
-        this.scrap_btn = scrap_btn;
-    }
-
-    public int getScrap_img() {
+    public String getScrap_img() {
         return scrap_img;
     }
 
-    public void setScrap_img(int scrap_img) {
+    public void setScrap_img(String scrap_img) {
         this.scrap_img = scrap_img;
     }
 
