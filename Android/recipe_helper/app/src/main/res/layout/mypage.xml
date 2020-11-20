@@ -22,35 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_circle" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name" />
-
-
-            <TextView
-                android:id="@+id/useremail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="E-mail" />
-
-
-            <TextView
-                android:id="@+id/ageGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Age and Gender" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -223,7 +194,6 @@
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
