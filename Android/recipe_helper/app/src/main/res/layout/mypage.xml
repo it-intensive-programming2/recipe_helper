@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -72,7 +71,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_circle" />
+            android:src="@drawable/ic_smiling" />
 
 
         <ImageView
@@ -80,14 +79,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_circle" />
+            android:src="@drawable/ic_smiling" />
 
         <ImageView
             android:id="@+id/HBP3"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_circle" />
+            android:src="@drawable/ic_smiling" />
 
     </LinearLayout>
 
@@ -138,31 +137,31 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_3"
         tools:ignore="DuplicateIds,MissingConstraints">
 
-    <TextView
-        android:id="@+id/allergytext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="알레르기"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/editbutton"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/allergytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알레르기"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/editbutton"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@id/editbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="edit"
-        android:textAlignment="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/allergytext"
-        tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@id/editbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="edit"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintLeft_toRightOf="@id/allergytext"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -198,8 +197,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="님의 취향분석"
-            android:textSize=""
-            />
+            android:textSize="" />
+
         <TextView
             android:id="@+id/tastebox"
             android:layout_width="match_parent"
@@ -208,11 +207,6 @@
             android:gravity="center" />
 
     </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     <TextView
         android:id="@+id/textView"
@@ -241,5 +235,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
