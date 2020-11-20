@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/item_fridge"
+        android:enabled="true"
+        android:icon="@drawable/ic_fridge"
+        android:title="나의 냉장고" />
+
+    <item
+        android:id="@+id/item_scrap"
+        android:enabled="true"
+        android:icon="@drawable/ic_scrap"
+        android:title="스크랩" />
+
+    <item
+        android:id="@+id/item_instagram"
+        android:enabled="true"
+        android:icon="@drawable/ic_instagram"
+        android:title="자랑하기" />
+
+    <item
+        android:id="@+id/item_mypage"
+        android:enabled="true"
+        android:icon="@drawable/ic_person"
+        android:title="내 정보" />
+
+</menu>
