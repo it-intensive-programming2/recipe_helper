@@ -24,10 +24,12 @@ public class MyPage extends Fragment {
         final int[] ImageId = {R.drawable.ic_sad, R.drawable.ic_neutral, R.drawable.ic_smiling};
 
 
-        iv = (ImageView) view.findViewById(R.id.imageView);
+        iv = (ImageView) view.findViewById(R.id.HBP1);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                user_state++;
+                if (user_state > 2) user_state = 0;
                 iv.setImageResource(ImageId[user_state]);
             }
         });
