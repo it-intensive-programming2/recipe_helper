@@ -20,6 +20,12 @@
         android:title="스크랩" />
 
     <item
+        android:id="@+id/item_instagram"
+        android:enabled="true"
+        android:icon="@drawable/ic_instagram"
+        android:title="자랑하기" />
+
+    <item
         android:id="@+id/item_mypage"
         android:enabled="true"
         android:icon="@drawable/ic_person"
