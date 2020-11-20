@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -84,18 +86,25 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         recyclerView1.setAdapter(adapter1);
 
         final ImageView btn_recommend1 = view.findViewById(R.id.btn_recommend1);
+        final TextView more_info1 = view.findViewById(R.id.more_info1);
         btn_recommend1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 list1.add(new DoubleHomeRecipeFrame(frame5, frame6));
                 adapter1.notifyDataSetChanged();
-                Log.d("RHC", "list size" + list1.size());
                 if (list1.size() > 2) {
-                    btn_recommend1.setImageResource(R.drawable.ic_baseline_more_horiz_24);
+                    btn_recommend1.setVisibility(View.GONE);
+                    more_info1.setVisibility(View.VISIBLE);
+                } else {
+                    btn_recommend1.setVisibility(View.VISIBLE);
+                    more_info1.setVisibility(View.GONE);
                 }
-                if (list1.size() > 3) {
-                    ((MainActivity) getActivity()).replaceFragment(new MyPage());
-                }
+            }
+        });
+        more_info1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).replaceFragment(new MyPage());
             }
         });
 
@@ -111,11 +120,12 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         recyclerView2.setLayoutManager(layoutManager2);
         recyclerView2.setAdapter(adapter2);
 
-        LinearLayout search_layout = view.findViewById(R.id.search_layout);
-        search_layout.setOnClickListener(new View.OnClickListener() {
+        //Todo Search
+        CardView cardview_search = view.findViewById(R.id.cardview_search);
+        cardview_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((MainActivity) getActivity()).replaceFragmentFull(new Search(""));
             }
         });
 

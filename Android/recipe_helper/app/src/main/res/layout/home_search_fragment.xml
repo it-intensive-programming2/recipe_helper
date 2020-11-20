@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_gray">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_gray"
+        android:paddingHorizontal="10dp">
+
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_gray"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp">
+
+            <TextView
+                android:id="@+id/tv_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:padding="15dp"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_baseline_search_24" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:overScrollMode="never"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:scrollbars="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="SEARCH FRAGMENT"
+        android:textSize="15sp" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

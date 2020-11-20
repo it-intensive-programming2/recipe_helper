@@ -7,31 +7,45 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white_gray"
+        android:elevation="0dp"
+        android:paddingHorizontal="10dp"
+        app:elevation="0dp">
 
-        <LinearLayout
-            android:id="@+id/search_layout"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="5dp">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:cardUseCompatPadding="true"
+            tools:ignore="MissingConstraints">
 
-            <EditText
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/search_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:hint="검색어를 입력하세요"
-                android:inputType="text"
-                android:padding="15dp" />
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:paddingHorizontal="15dp">
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_search_24" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:padding="15dp"
+                    android:text="레시피를 입력하세요"
+                    android:textColor="@color/faded_gray"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_search_24" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -126,7 +140,6 @@
                 android:scrollbars="vertical"
                 tools:ignore="MissingConstraints" />
 
-
             <ImageView
                 android:id="@+id/btn_recommend1"
                 android:layout_width="wrap_content"
@@ -135,6 +148,19 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+            <TextView
+                android:id="@+id/more_info1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_view1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="더 보기"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
 
             <LinearLayout
                 android:id="@+id/title_ll2"
