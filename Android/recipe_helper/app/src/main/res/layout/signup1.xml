@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="회원가입"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv1"
+            android:layout_marginRight="5dp"
+            android:text="닉네임: "
+
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userNickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv1"
+            android:layout_toEndOf="@id/tv2"
+            android:text="UserNickName"
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv2"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_marginEnd="5dp"
+            android:text="이메일: "
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv2"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_toEndOf="@id/tv3"
+            android:text="userEmail"
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv3"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_marginEnd="5dp"
+            android:text="성별: "
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv3"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_toEndOf="@id/tv4"
+            android:text="userGender"
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv4"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_marginEnd="5dp"
+            android:text="나이대: "
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userAgeRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv4"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_toEndOf="@id/tv5"
+            android:text="userAgeRange"
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv5"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_marginEnd="5dp"
+            android:text="알레르기"
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv6"
+            android:layout_marginTop="3dp"
+            android:text="알레르기가 있다면 체크해주세요. 자동으로 추천에서 제외되요." />
+
+        <include
+            android:id="@+id/checkbox"
+            layout="@layout/singup_alergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv7"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkbox"
+            android:layout_marginTop="@dimen/signup_margin_size"
+            android:layout_marginEnd="5dp"
+            android:text="3대 성인병"
+            android:textSize="@dimen/signup_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv8"
+            android:layout_marginTop="3dp"
+            android:text="해당하는 성인병의 정도를 체크해주세요." />
+
+        <LinearLayout
+            android:id="@+id/ll_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv9"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="정도" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="없음" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="보통" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="심각" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_0"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="고혈압"
+                android:textSize="@dimen/signup_text_size" />
+
+            <CheckBox
+                android:id="@+id/ck_HBP_0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true" />
+
+            <CheckBox
+                android:id="@+id/ck_HBP_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <CheckBox
+                android:id="@+id/ck_HBP_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_1"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="당뇨"
+                android:textSize="@dimen/signup_text_size" />
+
+            <CheckBox
+                android:id="@+id/ck_diabetes_0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true" />
+
+            <CheckBox
+                android:id="@+id/ck_diabetes_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <CheckBox
+                android:id="@+id/ck_diabetes_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_2"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="고지혈증"
+                android:textSize="@dimen/signup_text_size" />
+
+            <CheckBox
+                android:id="@+id/ck_hyperlipidemia_0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true" />
+
+            <CheckBox
+                android:id="@+id/ck_hyperlipidemia_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <CheckBox
+                android:id="@+id/ck_hyperlipidemia_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_3"
+            android:layout_alignParentEnd="true"
+            android:padding="30dp"
+            android:src="@drawable/ic_baseline_chevron_right_24" />
+    </RelativeLayout>
+</layout>
