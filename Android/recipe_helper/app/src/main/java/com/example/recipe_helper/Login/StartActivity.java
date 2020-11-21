@@ -138,6 +138,11 @@ public class StartActivity extends AppCompatActivity {
                         genderStr = kakaoAccount.getGender().getValue();
                         ageStr = kakaoAccount.getAgeRange().getValue();
                     }
+
+                    if (profileImageUrl == null) {
+                        profileImageUrl = "";
+                    }
+
                     user = new UserInfo(userID, nickName, accessToken, email, profileImageUrl, genderStr, ageStr, expTime);
                     if (autoLogin) {
                         intent = new Intent(getApplicationContext(), MainActivity.class);
