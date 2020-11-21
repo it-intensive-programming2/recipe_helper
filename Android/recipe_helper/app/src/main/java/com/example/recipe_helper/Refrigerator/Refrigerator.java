@@ -40,8 +40,6 @@ public class Refrigerator extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("나의 냉장고");
 
-        text = view.findViewById(R.id.testText);
-
         getText();
         return view;
     }

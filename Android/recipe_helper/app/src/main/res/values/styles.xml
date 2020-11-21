@@ -5,10 +5,10 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/saffron</item>
+        <item name="colorAccent">@color/turquoise</item>
         <item name="android:colorBackground">@color/white_gray</item>
         <item name="android:statusBarColor">@color/white_gray</item>
-        <item name="colorControlHighlight">#42ffaf12</item>
+        <item name="colorControlHighlight">@color/faded_turquoise</item>
         <item name="android:textColor">#373a3c</item>
     </style>
 
@@ -41,11 +41,11 @@
 
     <!-- Tab layout custom -->
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabIndicatorColor">@color/saffron</item>
+        <item name="tabIndicatorColor">@color/turquoise</item>
         <item name="background">@color/white</item>
         <item name="tabPaddingStart">6dp</item>
         <item name="tabPaddingEnd">6dp</item>
-        <item name="tabRippleColor">#42ffaf12</item>
+        <item name="tabRippleColor">@color/faded_turquoise</item>
         <item name="tabTextAppearance">@style/AppTabTextAppearance</item>
         <item name="tabSelectedTextColor">@color/black</item>
     </style>
@@ -55,8 +55,9 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="textAllCaps">false</item>
     </style>
-    <style name = "post_toolbar_check" parent = "Widget.AppCompat.ActionButton">
-        <item name = "minWidth">10dp</item>
-        <item name = "minHeight">10dp</item>
+
+    <style name="post_toolbar_check" parent="Widget.AppCompat.ActionButton">
+        <item name="minWidth">10dp</item>
+        <item name="minHeight">10dp</item>
     </style>
 </resources>

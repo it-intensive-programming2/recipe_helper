@@ -7,6 +7,8 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 
+    <color name="turquoise">#008578</color>
+    <color name="faded_turquoise">#50008578</color>
     <color name="classic_blue">#34538A</color>
     <color name="flame_scarlet">#d13b40</color>
     <color name="coral_pink">#eaac9d</color>
