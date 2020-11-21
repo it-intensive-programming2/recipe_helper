@@ -43,12 +43,6 @@ public class Refrigerator extends Fragment implements RefrigeratorRecyclerViewAd
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitle("나의 냉장고");
 
-//        this.recipeName = recipeName;
-//        this.ingredientName = ingredientName;
-//        this.cookTime = cookTime;
-//        this.photoURL = photoURL;
-//        this.recipeURl = recipeURl;
-
         String BaseUrl = "https://www.10000recipe.com/recipe/";
         RecipeData frame1 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2020/08/28/c37e0db0e0386d453eda2be45e26b9c01.jpg", "닭봉간장조림~ 십년째 만들어 먹는 양념 공유해요!", BaseUrl + "6940325", "15", "식재료");
         RecipeData frame2 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2020/10/29/89b11b0ce7f7e177f3f449546dc4edc11.jpg", "여러가지 매력을 가진 치즈감자호떡", BaseUrl + "6945267", "15", "식재료");
