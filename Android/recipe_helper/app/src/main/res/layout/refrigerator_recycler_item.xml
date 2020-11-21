@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scrap_layout"
+    android:id="@+id/refrige_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="15dp"
     android:orientation="horizontal"
     android:padding="15dp">
 
     <ImageView
-        android:id="@+id/scrap_img"
+        android:id="@+id/refrige_recipe_img"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher" />
@@ -23,21 +23,21 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/scrap_recipe_name"
+            android:id="@+id/refrige_recipe_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="요리명" />
 
         <TextView
-            android:id="@+id/scrap_recipe_ingredient"
+            android:id="@+id/refrige_recipe_ingredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="식재료" />
 
         <TextView
-            android:id="@+id/scrap_recipe_owner"
+            android:id="@+id/refrige_recipe_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -92,8 +92,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/user_img"
-            app:layout_constraintRight_toRightOf="parent"
-            >
+            app:layout_constraintRight_toRightOf="parent">
 
             <EditText
                 android:id="@+id/user_comments"
@@ -111,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginRight="100dp"
-            android:background="none"
+            android:background="#00ff0000"
             android:text="Post"
             android:textColor="#80CEE1"
             android:textSize="18dp"
@@ -120,6 +119,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
-             />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

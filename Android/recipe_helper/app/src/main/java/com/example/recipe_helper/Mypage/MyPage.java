@@ -1,5 +1,6 @@
 package com.example.recipe_helper.Mypage;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
