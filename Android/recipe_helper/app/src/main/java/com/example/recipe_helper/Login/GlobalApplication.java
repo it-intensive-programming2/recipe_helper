@@ -23,7 +23,7 @@ public class GlobalApplication extends Application {
             return new ISessionConfig() {
                 @Override
                 public AuthType[] getAuthTypes() {
-                    return new AuthType[]{AuthType.KAKAO_LOGIN_ALL};
+                    return new AuthType[]{AuthType.KAKAO_TALK};
                     //로그인을 어떤 방식으로 할지 지정
                     //KAKAO_LOGIN_ALL: 모든 로그인방식을 사용하고 싶을때 지정.
                 }

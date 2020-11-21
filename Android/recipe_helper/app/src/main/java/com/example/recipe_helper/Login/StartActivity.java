@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,18 +38,33 @@ public class StartActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
     private boolean autoLogin;
 
+    private Intent intent;
+    private UserInfo user;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        View view = getWindow().getDecorView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (view != null) {
+                // 23 버전 이상일 때 상태바 하얀 색상에 회색 아이콘 색상을 설정
+//                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                getWindow().setStatusBarColor(Color.parseColor("#008578"));
+            }
+        } else if (Build.VERSION.SDK_INT >= 21) {
+            // 21 버전 이상일 때
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
+
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
 
         if (Session.getCurrentSession().checkAndImplicitOpen()) {
-            Log.d("RHC", "Session Checked");
+            Log.d("RHC", "Session checked");
             autoLogin = true;
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
         } else {
             autoLogin = false;
             setContentView(R.layout.login);
@@ -120,10 +138,14 @@ public class StartActivity extends AppCompatActivity {
                         genderStr = kakaoAccount.getGender().getValue();
                         ageStr = kakaoAccount.getAgeRange().getValue();
                     }
-                    UserInfo user = new UserInfo(userID, nickName, accessToken, email, profileImageUrl, genderStr, ageStr, expTime);
-
-                    if (autoLogin) finish();
-                    else replaceFragmentFull(new SignUp1(user));
+                    user = new UserInfo(userID, nickName, accessToken, email, profileImageUrl, genderStr, ageStr, expTime);
+                    if (autoLogin) {
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("OBJECT", user);
+                        startActivity(intent);
+                        finish();
+                    } else replaceFragmentFull(new SignUp1(user, 1));
                 }
             });
         }
@@ -155,5 +177,6 @@ public class StartActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+//        transaction.commitAllowingStateLoss();
     }
 }

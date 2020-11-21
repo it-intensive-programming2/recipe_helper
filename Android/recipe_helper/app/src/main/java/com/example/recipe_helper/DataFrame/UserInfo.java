@@ -1,9 +1,11 @@
 package com.example.recipe_helper.DataFrame;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
-public class UserInfo extends RealmObject {
-    public long userID;
+public class UserInfo extends RealmObject implements Serializable {
+    public long id;
     public String nickName;
     public String email;
     public String profileImageUrl;
@@ -15,8 +17,8 @@ public class UserInfo extends RealmObject {
     public UserInfo() {
     }
 
-    public UserInfo(long userID, String nickName, String accessToken, String email, String profileImageUrl, String gender, String ageRange, long expTime) {
-        this.userID = userID;
+    public UserInfo(long id, String nickName, String accessToken, String email, String profileImageUrl, String gender, String ageRange, long expTime) {
+        this.id = id;
         this.accessToken = accessToken;
         this.nickName = nickName;
         this.email = email;

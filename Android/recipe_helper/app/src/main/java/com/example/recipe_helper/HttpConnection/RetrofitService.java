@@ -1,9 +1,12 @@
 package com.example.recipe_helper.HttpConnection;
 
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
@@ -15,4 +18,10 @@ public interface RetrofitService {
 
     @GET("/recipe/test")
     Call<RecipeResponse> getText(@Query("recipeName") String recipeName, @Query("ingredientName") String ingredientName);
+
+    @GET("/recipe/checkUser")
+    Call<BaseResponse> checkUser(@Query("id") long id);
+
+    @POST("recipe/signUp")
+    Call<BaseResponse> signUp(@Body JsonObject body);
 }
