@@ -10,6 +10,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.recipe_helper.Commnuity.Community_comment;
+import com.example.recipe_helper.Commnuity.Community_main;
 import com.example.recipe_helper.Home.Home;
 import com.example.recipe_helper.Mypage.MyPage;
 import com.example.recipe_helper.Refrigerator.Refrigerator;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private MyPage my_page;
     private Refrigerator refrigerator;
     private Scrap scrap;
+    private Community_main community_main;
+    private Community_comment community_comment;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.item_scrap:
                     replaceFragment(scrap);
+                    return true;
+                case R.id.item_community_main:
+                    replaceFragment(community_main);
                     return true;
                 case R.id.item_mypage:
                     replaceFragment(my_page);
@@ -55,14 +62,18 @@ public class MainActivity extends AppCompatActivity {
         refrigerator = new Refrigerator();
         scrap = new Scrap();
         my_page = new MyPage();
+        community_main = new Community_main();
+        community_comment = new Community_comment();
 
         navigation = findViewById(R.id.nav_bar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_home);
+
     }
 
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         transaction.replace(R.id.fragment_main, fragment);
         FragmentManager manager = getSupportFragmentManager();
         manager.popBackStackImmediate();
@@ -71,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void replaceFragmentFull(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         transaction.replace(R.id.fragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();

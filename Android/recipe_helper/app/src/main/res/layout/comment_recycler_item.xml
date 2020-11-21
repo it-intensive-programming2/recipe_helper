@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        tools:ignore="MissingConstraints">
+<ImageView
+    android:id="@+id/comment_user_pic"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:src="@mipmap/ic_launcher"
 
+    tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/comment_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/comment_user_pic"
+        android:textSize="13sp"
+        android:text="User_id"
+        android:textStyle="bold"
+        android:layout_marginLeft="15dp"
+        tools:ignore="MissingConstraints" />
+<TextView
+    android:id="@+id/comment_user_say"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintLeft_toRightOf="@+id/comment_user_id"
+    android:textSize="13sp"
+    android:text="Hi Thisis Johnson Kium Hi Thisis Johnson Kium Hi Thisis Johnson Kium Hi Thisis Johnson Kium Hi Thisis Johnson Kium"
+    android:layout_marginLeft="15dp"
+    tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
