@@ -1,12 +1,10 @@
 package com.example.recipe_helper.Home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -136,4 +134,5 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
     public void onItemSelected(View v, String recipe_url) {
         ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(recipe_url));
     }
+
 }

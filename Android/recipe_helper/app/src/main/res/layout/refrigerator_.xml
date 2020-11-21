@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="50dp">
 
-    <com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white_gray"
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
-            app:title="TITLE" />
+            app:title="나의 냉장고" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/appbar_layout"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -50,33 +50,47 @@
     <LinearLayout
         android:id="@+id/HelperSolution"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="30dp"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myrefrigerator"
         tools:ignore="MissingConstraints">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="Helper의 Solution"
             android:textSize="20sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view1"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_ll1"
-            android:layout_marginHorizontal="5dp"
-            android:overScrollMode="never"
-            android:scrollbarFadeDuration="0"
-            android:scrollbarSize="5dp"
-            android:scrollbarThumbVertical="@android:color/darker_gray"
-            android:scrollbars="vertical"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="match_parent">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbarFadeDuration="0"
+                android:scrollbarSize="5dp"
+                android:scrollbarThumbVertical="@android:color/darker_gray"
+                android:scrollbars="vertical"
+                tools:ignore="MissingConstraints" />
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:src="@drawable/ic_harvest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

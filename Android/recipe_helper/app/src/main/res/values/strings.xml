@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">recipe_helper</string>
+    <string name="app_name">recipe helper</string>
+    <string name="kakao_app_key">f8801b81ecb043ae34aff2f15a9325d7</string>
 </resources>
