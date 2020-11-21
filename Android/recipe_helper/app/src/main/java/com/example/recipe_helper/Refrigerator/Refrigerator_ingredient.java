@@ -1,6 +1,7 @@
 package com.example.recipe_helper.Refrigerator;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,31 +24,25 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class Refrigerator_ingredient extends Fragment {
 
     private IngredientRecyclerViewAdapter adapter;
     private ArrayList<IngredientData> list = new ArrayList<>();
 
+    private Realm realm;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.refrigerator_add, container, false);
         view.setClickable(true);
-        list.clear();
 
+        realm = Realm.getDefaultInstance();
 
-        IngredientData frame1 = new IngredientData("사과");
-        IngredientData frame2 = new IngredientData("양파");
-        IngredientData frame3 = new IngredientData("감자");
-        IngredientData frame4 = new IngredientData("고구마");
-        IngredientData frame5 = new IngredientData("소고기");
-
-        list.add(frame1);
-        list.add(frame2);
-        list.add(frame3);
-        list.add(frame4);
-        list.add(frame5);
+        readRealm();
 
         adapter = new IngredientRecyclerViewAdapter(getContext(), list);
 
@@ -70,5 +65,17 @@ public class Refrigerator_ingredient extends Fragment {
         });
 
         return view;
+    }
+
+    void readRealm() {
+        final RealmResults<IngredientData> results = realm.where(IngredientData.class).findAll();
+        list.clear();
+        list.addAll(realm.copyFromRealm(results));
+        Log.d("NDH", "readRealm: " + list.size());
+
+//        realm형태의 리스트를 arraylist로 바꿔주는 작업
+//        ArrayList<IngredientData> tmp = new ArrayList<>();
+//        tmp = (ArrayList<IngredientData>) realm.copyFromRealm(results);
+
     }
 }

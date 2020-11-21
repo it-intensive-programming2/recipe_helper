@@ -12,7 +12,7 @@ public class LocalDB extends Application {
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .allowWritesOnUiThread(true)
-                .name("UserInfo.realm")
+                .name("MyIngredient.realm")
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);

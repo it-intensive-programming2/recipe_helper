@@ -18,12 +18,15 @@ import com.example.recipe_helper.R;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 import static com.example.recipe_helper.R.drawable.ic_apple;
 
 public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<IngredientRecyclerViewAdapter.Holder> {
 
     private ArrayList<IngredientData> arrayList = new ArrayList<IngredientData>();
     private Context context;
+    private Realm realm;
 
     public IngredientRecyclerViewAdapter(Context context, ArrayList<IngredientData> arrayList) {
         this.arrayList = arrayList;
@@ -34,6 +37,7 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
     @Override
     public IngredientRecyclerViewAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.refrigerator_recycler_ingredient_item, parent, false);
+        realm = Realm.getDefaultInstance();
         Holder holder = new Holder(view);
         return holder;
     }
@@ -64,8 +68,16 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
             delete_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    arrayList.remove(getAdapterPosition());
-                    notifyItemRemoved(getAdapterPosition());
+                    final int position = getAdapterPosition();
+                    realm.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            IngredientData ingredientData = realm.where(IngredientData.class).equalTo("ig_name", arrayList.get(position).ig_name).findFirst();
+                            arrayList.remove(position);
+                            notifyItemRemoved(position);
+                            ingredientData.deleteFromRealm();
+                        }
+                    });
                 }
             });
         }
