@@ -6,8 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.recipe_helper.Home.Home;
@@ -15,6 +20,8 @@ import com.example.recipe_helper.Mypage.MyPage;
 import com.example.recipe_helper.Refrigerator.Refrigerator;
 import com.example.recipe_helper.Scrap.Scrap;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.security.MessageDigest;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         navigation = findViewById(R.id.nav_bar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_home);
+
+        getAppKeyHash();
     }
 
     public void replaceFragment(Fragment fragment) {
@@ -78,5 +87,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+    }
+
+    private void getAppKeyHash() {
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String hashkey = new String(Base64.encode(md.digest(), 0));
+                Log.d("HASH", "getAppKeyHash: " + hashkey);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            Log.e("name not found", e.toString());
+        }
     }
 }
