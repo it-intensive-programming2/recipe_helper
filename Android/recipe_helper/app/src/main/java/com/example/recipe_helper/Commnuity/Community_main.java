@@ -45,13 +45,20 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
         post_list.add(new Post(frame1.recipe_name, frame1.img_url, "Johnson", "It's good time to go for dinner Hey let's go out now nonono I have to do more develope this app", null, null));
         post_list.add(new Post(frame2.recipe_name, frame2.img_url, "Kyung-Sik Han", "으워워우어ㅜ어웅ㅁ니니ㅣ앙으워워우어ㅜ어웅ㅁ니니ㅣ앙으워워우어ㅜ어웅ㅁ니니ㅣ앙으워워우어ㅜ어웅ㅁ니니ㅣ앙", null, null));
 
-        adapter = new PostAdapter(getContext(), post_list, this);
+        adapter = new PostAdapter(getContext(), post_list, this, this);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.community_recycler);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager1);
         recyclerView.setAdapter(adapter);
+
+        view.findViewById(R.id.background).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).replaceFragmentFull(new Upload_post());
+            }
+        });
 
         return view;
 
@@ -63,4 +70,9 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
     public void onItemSelected(View v, String id, String img, String content) {
         ((MainActivity) getActivity()).replaceFragmentFull(Community_comment.newInstance(id, img, content));
     }
+
+ //   @Override
+//    public void upload_onItemSelected(View v) {
+//        ((MainActivity) getActivity()).replaceFragmentFull(new Upload_post());
+//    }
 }
