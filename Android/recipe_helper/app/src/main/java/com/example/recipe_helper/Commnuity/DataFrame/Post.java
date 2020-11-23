@@ -19,10 +19,7 @@ public class Post {
     private String post_title;
     private String user_img;
     private String img_url;
-
-
-
-    private String user_id;
+   private String user_id;
     private String post_content;
     private ArrayList<Comments> comments;
 

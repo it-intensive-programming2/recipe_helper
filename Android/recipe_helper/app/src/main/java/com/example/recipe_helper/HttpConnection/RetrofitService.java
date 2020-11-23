@@ -1,5 +1,6 @@
 package com.example.recipe_helper.HttpConnection;
 
+import com.example.recipe_helper.Commnuity.DataFrame.Post2Response;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
 import com.google.gson.JsonObject;
 
@@ -24,4 +25,7 @@ public interface RetrofitService {
 
     @POST("recipe/signUp")
     Call<BaseResponse> signUp(@Body JsonObject body);
+
+    @GET("recipe/loadPost")
+    Call<Post2Response> loadPost();
 }

@@ -19,7 +19,13 @@ import com.devs.readmoreoption.ReadMoreOption;
 import com.example.recipe_helper.Commnuity.Adapter.PostAdapter;
 import com.example.recipe_helper.Commnuity.DataFrame.Comments;
 import com.example.recipe_helper.Commnuity.DataFrame.Post;
+import com.example.recipe_helper.Commnuity.DataFrame.Post2;
+import com.example.recipe_helper.Commnuity.DataFrame.Post2Response;
 import com.example.recipe_helper.Home.Dataframe.HomeRecipeFrame;
+import com.example.recipe_helper.HttpConnection.BaseResponse;
+import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
+import com.example.recipe_helper.HttpConnection.RetrofitService;
+import com.example.recipe_helper.Login.SignUp1;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.Mypage.MyPage;
 import com.example.recipe_helper.R;
@@ -27,8 +33,11 @@ import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+
 public class Community_main extends Fragment implements PostAdapter.OnListItemSelectedInterface {
 
+    private static final String TAG = "Community_main";
     private ArrayList<Post> post_list = new ArrayList<>();
     private PostAdapter adapter;
 
@@ -55,6 +64,35 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
 
         return view;
 
+    }
+
+    public void loadPost() {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<Post2Response> call = service.loadPost();
+
+        call.enqueue(new retrofit2.Callback<Post2Response>() {
+            @Override
+            public void onResponse(Call<Post2Response> call, retrofit2.Response<Post2Response> response) {
+                if (response.isSuccessful()) {
+                    Post2Response result = response.body();
+                    if (result.checkError(getContext()) != 0) {
+                        Log.d(TAG, "ERROR");
+                    }
+                    //Todo
+                    ArrayList<Post2> results = result.body;
+
+                    post_list.addAll(results);
+
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post2Response> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
 
