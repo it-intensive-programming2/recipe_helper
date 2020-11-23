@@ -81,7 +81,7 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
                     //Todo
                     ArrayList<Post2> results = result.body;
 
-                    post_list.addAll(results);
+//                    post_list.addAll(results);
 
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());

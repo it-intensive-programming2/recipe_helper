@@ -1,31 +1,11 @@
 package com.example.recipe_helper.Commnuity.DataFrame;
 
 public class Comments {
-    private String user_id;
-    private String user_img;
-    private String content;
-
-    public Comments(String user_id, String user_img, String content) {
-        this.user_id = user_id;
-        this.user_img = user_img;
-        this.content = content;
-    }
-
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getUser_img() {
-        return user_img;
-    }
-
-    public void setUser_img(String user_img) {
-        this.user_img = user_img;
-    }
+    public String content;
+    public int postID;
+    public String writerNickname;
+    public String writerProfileUrl;
+    public int id;
 
     public String getContent() {
         return content;
@@ -33,5 +13,47 @@ public class Comments {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getPostID() {
+        return postID;
+    }
+
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
+
+    public String getWriterNickname() {
+        return writerNickname;
+    }
+
+    public void setWriterNickname(String writerNickname) {
+        this.writerNickname = writerNickname;
+    }
+
+    public String getWriterProfileUrl() {
+        return writerProfileUrl;
+    }
+
+    public void setWriterProfileUrl(String writerProfileUrl) {
+        this.writerProfileUrl = writerProfileUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Comments(String content, int postID, String writerNickname, String writerProfileUrl, int id) {
+        this.content = content;
+        this.postID = postID;
+        this.writerNickname = writerNickname;
+        this.writerProfileUrl = writerProfileUrl;
+        this.id = id;
+
+
     }
 }

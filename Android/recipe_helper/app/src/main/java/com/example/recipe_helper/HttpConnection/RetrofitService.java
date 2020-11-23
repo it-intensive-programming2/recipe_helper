@@ -30,8 +30,8 @@ public interface RetrofitService {
     @GET("recipe/loadPost")
     Call<Post2Response> loadPost();
 
-    @GET("recipe/loadComent")
-    Call<Comments2Response> loadComment();
+    @GET("recipe/loadComment")
+    Call<Comments2Response> loadComment(@Query("postID") int postID);
 
 
 }

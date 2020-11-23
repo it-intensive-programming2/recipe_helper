@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public class Comments2Response extends BaseResponse {
 
-    public ArrayList<Comments2> body;
+    public ArrayList<Comments> body;
 }
