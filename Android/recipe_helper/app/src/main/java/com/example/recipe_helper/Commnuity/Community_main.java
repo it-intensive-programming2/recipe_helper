@@ -76,11 +76,15 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
                     }
                     //Todo
 
+<<<<<<< HEAD
                     ArrayList<Post> results = result.body;
 
                     post_list.clear();
                     post_list.addAll(results);
                     adapter.notifyDataSetChanged();
+=======
+//                    post_list.addAll(results);
+>>>>>>> 67d32ce82fe543fbb55b30c25b2d53c1a4312f43
 
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
