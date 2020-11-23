@@ -1,5 +1,6 @@
 package com.example.recipe_helper.HttpConnection;
 
+import com.example.recipe_helper.Commnuity.DataFrame.Comments2Response;
 import com.example.recipe_helper.Commnuity.DataFrame.Post2Response;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
 import com.google.gson.JsonObject;
@@ -28,4 +29,9 @@ public interface RetrofitService {
 
     @GET("recipe/loadPost")
     Call<Post2Response> loadPost();
+
+    @GET("recipe/loadComent")
+    Call<Comments2Response> loadComment();
+
+
 }

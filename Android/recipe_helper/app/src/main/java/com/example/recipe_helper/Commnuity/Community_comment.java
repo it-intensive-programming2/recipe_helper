@@ -16,10 +16,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
+import com.example.recipe_helper.Commnuity.DataFrame.Comments2;
+import com.example.recipe_helper.Commnuity.DataFrame.Comments2Response;
+import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
+import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.R;
 
-public class Community_comment extends Fragment {
+import java.util.ArrayList;
+
+import retrofit2.Call;
+
+public class Community_comment extends Fragment implements CommentAdapter.OnListItemSelectedInterface{
+
+    private static final String TAG = "Community_comment";
+    private ArrayList<Comments2> comment_list = new ArrayList<Comments2>();
+    private CommentAdapter adapter;
 
     private String id;
     private String content;
@@ -65,6 +76,35 @@ public class Community_comment extends Fragment {
         actionbar.setDisplayHomeAsUpEnabled(true);
 
         return view;
+    }
+
+    public void loadComment() {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<Comments2Response> call = service.loadComment();
+
+        call.enqueue(new retrofit2.Callback<Comments2Response>() {
+            @Override
+            public void onResponse(Call<Comments2Response> call, retrofit2.Response<Comments2Response> response) {
+                if (response.isSuccessful()) {
+                    Comments2Response result = response.body();
+                    if (result.checkError(getContext()) != 0) {
+                        Log.d(TAG, "ERROR");
+                    }
+                    //Todo
+                    ArrayList<Comments2> results = result.body;
+
+                    comment_list.addAll(results);
+
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Comments2Response> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     @Override
