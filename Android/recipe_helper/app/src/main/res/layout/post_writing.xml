@@ -58,6 +58,7 @@
             >
 
             <EditText
+                android:id="@+id/post_enter_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Title..."
@@ -90,6 +91,7 @@
                 android:layout_height="match_parent">
 
                 <EditText
+                    android:id="@+id/post_enter_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"

@@ -54,8 +54,6 @@ public class Search extends Fragment {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
 
-        출처: https://alaveiw.tistory.com/133 [어허]
-
         listView = view.findViewById(R.id.listView);
 
         list.add(new HomeRecipeFrame("ul", "recipename~~", "recipeurl"));

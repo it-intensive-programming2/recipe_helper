@@ -89,23 +89,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 .labelUnderLine(false)
                 .expandAnimation(true)
                 .build();
-        Glide.with(context).load(post_list.get(position).getImg_url()).into(holder.post_pics);
-        holder.post_user_id.setText(post_list.get(position).getUser_id());
-        holder.post_title.setText(post_list.get(position).getPost_title());
-        readMoreOption.addReadMoreTo(holder.post_content, post_list.get(position).getPost_content());
+        Glide.with(context).load(post_list.get(position).getWriterProfileUrl()).into(holder.post_pics);
+        holder.post_user_id.setText(post_list.get(position).getWriterNickname());
+        holder.post_title.setText(post_list.get(position).getTitle());
+
+        try {
+            readMoreOption.addReadMoreTo(holder.post_content, post_list.get(position).getPost_content());
+        } catch(NullPointerException e){}
+
         holder.post_content.setText(post_list.get(position).getPost_content());
 
         holder.balloon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mlistener.onItemSelected(v, post_list.get(position).getUser_id(), post_list.get(position).getUser_img(), post_list.get(position).getPost_content());
+                mlistener.onItemSelected(v, post_list.get(position).getWriterNickname(), post_list.get(position).getWriterProfileUrl(), post_list.get(position).getPost_content());
 
             }
         });
         holder.extend_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mlistener.onItemSelected(v, post_list.get(position).getUser_id(), post_list.get(position).getUser_img(), post_list.get(position).getPost_content());
+                mlistener.onItemSelected(v, post_list.get(position).getWriterNickname(), post_list.get(position).getWriterProfileUrl(), post_list.get(position).getPost_content());
             }
         });
     }

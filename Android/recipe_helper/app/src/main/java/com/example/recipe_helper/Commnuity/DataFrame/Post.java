@@ -16,62 +16,80 @@ import com.example.recipe_helper.R;
 import java.util.ArrayList;
 
 public class Post {
-    private String post_title;
-    private String user_img;
-    private String img_url;
-
-
-
-    private String user_id;
+    private String writerNickname;
+    private String title;
+    private String writerProfileUrl;
+    private int heart;
+    private int comment;
+    private long postID;
+    private String content;
     private String post_content;
-    private ArrayList<Comments> comments;
 
-    public Post(String post_title, String img_url, String user_id, String post_content, ArrayList<Comments> comments, String user_img) {
-        this.post_title = post_title;
-        this.img_url = img_url;
-        this.user_id = user_id;
+    public Post(String writerNickname, String title, String writerProfileUrl, int heart, int comment, long postID, String content, String post_content) {
+        this.writerNickname = writerNickname;
+        this.title = title;
+        this.writerProfileUrl = writerProfileUrl;
+        this.heart = heart;
+        this.comment = comment;
+        this.postID = postID;
+        this.content = content;
         this.post_content = post_content;
-        this.comments = comments;
-        this.user_img = user_img;
     }
 
-    public String getUser_img() {
-        return user_img;
+    public String getWriterNickname() {
+        return writerNickname;
     }
 
-    public void setUser_img(String user_img) {
-        this.user_img = user_img;
+    public void setWriterNickname(String writerNickname) {
+        this.writerNickname = writerNickname;
     }
 
-    public ArrayList<Comments> getComments() {
-        return comments;
+    public String getTitle() {
+        return title;
     }
 
-    public void setComments(ArrayList<Comments> comments) {
-        this.comments = comments;
-    }
-    public String getPost_title() {
-        return post_title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setPost_title(String post_title) {
-        this.post_title = post_title;
+    public String getWriterProfileUrl() {
+        return writerProfileUrl;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public void setWriterProfileUrl(String writerProfileUrl) {
+        this.writerProfileUrl = writerProfileUrl;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public int getHeart() {
+        return heart;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public void setHeart(int heart) {
+        this.heart = heart;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
+    }
+
+    public long getPostID() {
+        return postID;
+    }
+
+    public void setPostID(long postID) {
+        this.postID = postID;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getPost_content() {
@@ -81,5 +99,4 @@ public class Post {
     public void setPost_content(String post_content) {
         this.post_content = post_content;
     }
-
 }

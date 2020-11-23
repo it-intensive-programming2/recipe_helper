@@ -44,5 +44,5 @@
         android:layout_height="30dp"
         android:layout_gravity="bottom"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_icon_before_scrap" />
+        android:src="@drawable/ic_icon_after_scrap" />
 </LinearLayout>

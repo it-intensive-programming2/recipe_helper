@@ -82,7 +82,7 @@ public class GlobalApplication extends Application {
 
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("UserInfo.realm")
+                .name("MyIngredient.realm")
                 .build();
         Realm.setDefaultConfiguration(config);
 
