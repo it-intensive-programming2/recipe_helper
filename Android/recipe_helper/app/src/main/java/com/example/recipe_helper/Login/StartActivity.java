@@ -143,7 +143,7 @@ public class StartActivity extends AppCompatActivity {
                         profileImageUrl = "";
                     }
 
-                    user = new UserInfo(userID, nickName, accessToken, email, profileImageUrl, genderStr, ageStr, expTime);
+                    user = new UserInfo(userID, nickName, accessToken, email, profileImageUrl, genderStr, ageStr, expTime, "0000000000", "000");
                     if (autoLogin) {
                         intent = new Intent(getApplicationContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

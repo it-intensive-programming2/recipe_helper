@@ -1,11 +1,5 @@
 package com.example.recipe_helper;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -16,11 +10,17 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.recipe_helper.Commnuity.Community_comment;
 import com.example.recipe_helper.Commnuity.Community_main;
 import com.example.recipe_helper.DataFrame.UserInfo;
+import com.example.recipe_helper.DataFrame.UserInfoResponse;
 import com.example.recipe_helper.Home.Home;
-import com.example.recipe_helper.HttpConnection.BaseResponse;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.Login.SignUp1;
@@ -144,24 +144,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkUser() {
         RetrofitService service = RetrofitAdapter.getInstance(this);
-        Call<BaseResponse> call = service.checkUser(user.id);
+        Call<UserInfoResponse> call = service.checkUser(user.id);
 
-        call.enqueue(new retrofit2.Callback<BaseResponse>() {
+        call.enqueue(new retrofit2.Callback<UserInfoResponse>() {
             @Override
-            public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {
+            public void onResponse(Call<UserInfoResponse> call, retrofit2.Response<UserInfoResponse> response) {
                 if (response.isSuccessful()) {
-                    BaseResponse result = response.body();
+                    UserInfoResponse result = response.body();
                     if (result.checkError(getApplicationContext()) == 3) {
                         Log.d("RHC", "not registerd");
                         replaceSignUp(new SignUp1(user, 0));
                     }
+                    user = result.body;
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
                 }
             }
 
             @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

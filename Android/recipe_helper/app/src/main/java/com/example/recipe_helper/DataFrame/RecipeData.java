@@ -1,17 +1,13 @@
 package com.example.recipe_helper.DataFrame;
 
 public class RecipeData {
-    public String recipeName;
-    public String ingredientName;
-    public String cookTime;
-    public String photoURL;
-    public String recipeURl;
-
-    public RecipeData(String photoURL, String recipeName, String recipeURl, String cookTime, String ingredientName) {
-        this.recipeName = recipeName;
-        this.ingredientName = ingredientName;
-        this.cookTime = cookTime;
-        this.photoURL = photoURL;
-        this.recipeURl = recipeURl;
-    }
+    public int recipeID;
+    public String cat1;
+    public String cat2;
+    public String title;
+    public String ingredientList;
+    public String level;
+    public String time;
+    public String photo;
+    public String author;
 }

@@ -1,7 +1,6 @@
 package com.example.recipe_helper.Home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,10 @@ import com.example.recipe_helper.R;
 
 public class WebViewFragment extends Fragment {
 
-    private String recipe_url;
+    private String recipeID;
 
-    public WebViewFragment(String recipe_url) {
-        this.recipe_url = recipe_url;
+    public WebViewFragment(String recipeID) {
+        this.recipeID = recipeID;
     }
 
     @Nullable
@@ -43,7 +42,7 @@ public class WebViewFragment extends Fragment {
         mWebSettings.setCacheMode(WebSettings.LOAD_NO_CACHE); // 브라우저 캐시 허용 여부
         mWebSettings.setDomStorageEnabled(true); // 로컬저장소 허용 여부
 
-        mWebView.loadUrl(recipe_url); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
+        mWebView.loadUrl("https://www.10000recipe.com/recipe/" + recipeID); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
         return view;
     }

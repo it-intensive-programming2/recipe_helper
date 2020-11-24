@@ -12,12 +12,14 @@ public class UserInfo extends RealmObject implements Serializable {
     public String gender;
     public String ageRange;
     public String accessToken;
+    public String allergy;
+    public String disease;
     public long expTime;
 
     public UserInfo() {
     }
 
-    public UserInfo(long id, String nickName, String accessToken, String email, String profileImageUrl, String gender, String ageRange, long expTime) {
+    public UserInfo(long id, String nickName, String accessToken, String email, String profileImageUrl, String gender, String ageRange, long expTime, String allergy, String disease) {
         this.id = id;
         this.accessToken = accessToken;
         this.nickName = nickName;
@@ -26,5 +28,7 @@ public class UserInfo extends RealmObject implements Serializable {
         this.ageRange = ageRange;
         this.expTime = expTime;
         this.profileImageUrl = profileImageUrl;
+        this.allergy = allergy;
+        this.disease = disease;
     }
 }

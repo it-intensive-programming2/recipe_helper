@@ -23,15 +23,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipe_helper.Commnuity.Adapter.CommentAdapter;
-import com.example.recipe_helper.Commnuity.Adapter.PostAdapter;
 import com.example.recipe_helper.Commnuity.DataFrame.Comments;
 import com.example.recipe_helper.Commnuity.DataFrame.Comments2Response;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
-
-import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
 
@@ -100,15 +97,15 @@ public class Community_comment extends Fragment implements CommentAdapter.OnList
         EditText user_comments = view.findViewById(R.id.user_comments);
         Button comments_post_btn = view.findViewById(R.id.comments_post_btn);
 
-        comments_post_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user_comments.getText().toString().equals("")) et_input.setError("재료를 입력하세요");
-                else {
-                    addIngredient(et_input.getText().toString());
-                }
-            }
-        })
+//        comments_post_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (user_comments.getText().toString().equals("")) et_input.setError("재료를 입력하세요");
+//                else {
+//                    addIngredient(et_input.getText().toString());
+//                }
+//            }
+//        });
 
         return view;
     }

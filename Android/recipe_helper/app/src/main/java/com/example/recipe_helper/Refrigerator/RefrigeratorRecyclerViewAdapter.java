@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipe_helper.DataFrame.RecipeData;
-import com.example.recipe_helper.Home.Adapter.HomeRecyclerViewAdapter;
 import com.example.recipe_helper.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -46,13 +43,13 @@ public class RefrigeratorRecyclerViewAdapter extends RecyclerView.Adapter<Refrig
     @Override
     public void onBindViewHolder(@NonNull RefrigeratorRecyclerViewAdapter.Holder holder, int position) {
 
-        Glide.with(context).load(arrayList.get(position).photoURL).into(holder.refrige_recipe_img);
+        Glide.with(context).load(arrayList.get(position).photo).into(holder.refrige_recipe_img);
 
-        holder.refrige_recipe_ingredient.setText(arrayList.get(position).ingredientName);
-        holder.refrige_recipe_time.setText(arrayList.get(position).cookTime);
-        holder.refrige_recipe_name.setText(arrayList.get(position).recipeName);
+        holder.refrige_recipe_ingredient.setText(arrayList.get(position).ingredientList);
+        holder.refrige_recipe_time.setText(arrayList.get(position).time);
+        holder.refrige_recipe_name.setText(arrayList.get(position).title);
 
-        holder.recipeUrl = arrayList.get(position).recipeURl;
+        holder.recipeUrl = String.valueOf(arrayList.get(position).recipeID);
     }
 
     @Override

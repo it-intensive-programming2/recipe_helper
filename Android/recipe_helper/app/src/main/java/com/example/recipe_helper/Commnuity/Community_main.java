@@ -18,12 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recipe_helper.Commnuity.Adapter.PostAdapter;
 import com.example.recipe_helper.Commnuity.DataFrame.Post;
 import com.example.recipe_helper.Commnuity.DataFrame.PostResponse;
-import com.example.recipe_helper.Home.Dataframe.HomeRecipeFrame;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
-
 
 import java.util.ArrayList;
 
@@ -75,16 +73,11 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
                         Log.d(TAG, "ERROR");
                     }
                     //Todo
-
-<<<<<<< HEAD
                     ArrayList<Post> results = result.body;
 
                     post_list.clear();
                     post_list.addAll(results);
                     adapter.notifyDataSetChanged();
-=======
-//                    post_list.addAll(results);
->>>>>>> 67d32ce82fe543fbb55b30c25b2d53c1a4312f43
 
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
@@ -94,8 +87,8 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
-                Toast toast = Toast.makeText(getContext(),"연결실패", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.CENTER_VERTICAL, 30, 15 );
+                Toast toast = Toast.makeText(getContext(), "연결실패", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL, 30, 15);
                 toast.show();
             }
         });

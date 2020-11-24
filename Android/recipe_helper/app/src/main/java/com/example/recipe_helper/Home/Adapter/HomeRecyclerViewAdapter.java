@@ -90,6 +90,4 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
         holder.itemView.setTag(position);
     }
-
-
 }

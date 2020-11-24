@@ -44,23 +44,8 @@ public class Refrigerator extends Fragment implements RefrigeratorRecyclerViewAd
         toolbar.setTitle("나의 냉장고");
 
 
-        String BaseUrl = "https://www.10000recipe.com/recipe/";
-        RecipeData frame1 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2020/08/28/c37e0db0e0386d453eda2be45e26b9c01.jpg", "닭봉간장조림~ 십년째 만들어 먹는 양념 공유해요!", BaseUrl + "6940325", "15", "식재료");
-        RecipeData frame2 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2020/10/29/89b11b0ce7f7e177f3f449546dc4edc11.jpg", "여러가지 매력을 가진 치즈감자호떡", BaseUrl + "6945267", "15", "식재료");
-        RecipeData frame3 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2019/05/25/39ac1e73e998e88da300d38663242f0a1.jpg", "버섯으로 관자 느낌 내는 방법! 새송이버섯간장버터구이 만들기", BaseUrl + "6912734", "15", "식재료");
-        RecipeData frame4 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2018/08/17/d1d0c5999686a5ec11e426b79abf4a1a1.jpg", "고기처럼 쫄깃한 밥도둑 반찬 '새송이버섯 간장버터구이'레시피", BaseUrl + "6894323", "15", "식재료");
-        final RecipeData frame5 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2017/12/18/58dd1a9a0d0ef8ff0c60dc35965ea09d1.jpg", "완전맛있는 차돌박이찜! 미소된장마요소스도 함께~", BaseUrl + "6881099", "15", "식재료");
-        final RecipeData frame6 = new RecipeData("https://recipe1.ezmember.co.kr/cache/recipe/2017/07/10/092788fb72da830f79991bde7d9c68831.jpg", "새우요리 갈릭마요새우~ 요거 완전 맛있지~", BaseUrl + "6872474", "15", "식재료");
-
-
         //Todo Helper 의 솔루션
 
-        list.add(frame1);
-        list.add(frame2);
-        list.add(frame3);
-        list.add(frame4);
-        list.add(frame5);
-        list.add(frame6);
         adapter = new RefrigeratorRecyclerViewAdapter(getContext(), list, this);
 
         RecyclerView recyclerView1 = (RecyclerView) view.findViewById(R.id.recycler_view1);

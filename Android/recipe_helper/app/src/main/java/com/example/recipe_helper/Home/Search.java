@@ -4,21 +4,25 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recipe_helper.DataFrame.RecipeData;
+import com.example.recipe_helper.DataFrame.RecipeResponse;
 import com.example.recipe_helper.Home.Adapter.SearchAdapter;
-import com.example.recipe_helper.Home.Dataframe.HomeRecipeFrame;
+import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
+import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 
@@ -28,7 +32,8 @@ import retrofit2.Call;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-public class Search extends Fragment {
+public class Search extends Fragment implements SearchAdapter.OnListItemSelectedInterface {
+    private static final String TAG = Search.class.getName();
     private String input;
 
     public Search(String input) {
@@ -36,8 +41,7 @@ public class Search extends Fragment {
     }
 
     private EditText et_input;
-    private ListView listView;
-    private ArrayList<HomeRecipeFrame> list = new ArrayList<HomeRecipeFrame>();
+    private ArrayList<RecipeData> list = new ArrayList<RecipeData>();
     private SearchAdapter adapter;
 
     @Nullable
@@ -53,23 +57,15 @@ public class Search extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
+        adapter = new SearchAdapter(getContext(), list, this);
 
-        listView = view.findViewById(R.id.listView);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
 
-        list.add(new HomeRecipeFrame("ul", "recipename~~", "recipeurl"));
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager1);
+        recyclerView.setAdapter(adapter);
 
-        adapter = new SearchAdapter(getContext(), list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                HomeRecipeFrame recipe = list.get(i);
-                InputMethodManager imm = (InputMethodManager) ((MainActivity) getActivity()).getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
-                replaceSearchFragment(new SearchFragment(recipe.recipe_name));
-                et_input.clearFocus();
-            }
-        });
         et_input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -84,48 +80,57 @@ public class Search extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String text = et_input.getText().toString();
-//                search(text);
+                search(text);
             }
         });
 
         return view;
     }
 
-//    private void search(String query) {
-//        list.clear();
-//        if (query.equals("")) {
-//            adapter.notifyDataSetChanged();
-//            return;
-//        }
-//
-//        RetrofitAdapter rAdapter = new RetrofitAdapter();
-//        RetrofitService service = rAdapter.getInstance(getActivity());
-//        Call<UnivResponse> call = service.searchCollageName(query);
-//
-//        call.enqueue(new retrofit2.Callback<UnivResponse>() {
-//            @Override
-//            public void onResponse(Call<UnivResponse> call, retrofit2.Response<UnivResponse> response) {
-//                if (response.isSuccessful()) {
-//                    UnivResponse result = response.body();
-//                    list.clear();
-//                    list.addAll(result.body);
-//                    adapter.notifyDataSetChanged();
-//                } else {
-//                    Log.d(TAG, "onResponse: Fail " + response.body());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<UnivResponse> call, Throwable t) {
-//                Log.d(TAG, "onFailure: " + t.getMessage());
-//            }
-//        });
-//    }
+    private void search(String query) {
+        list.clear();
+        if (query.equals("")) {
+            adapter.notifyDataSetChanged();
+            return;
+        }
+
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<RecipeResponse> call = service.searchRecipe(query);
+
+        call.enqueue(new retrofit2.Callback<RecipeResponse>() {
+            @Override
+            public void onResponse(Call<RecipeResponse> call, retrofit2.Response<RecipeResponse> response) {
+                if (response.isSuccessful()) {
+                    RecipeResponse result = response.body();
+                    list.clear();
+                    list.addAll(result.body);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RecipeResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
 
     public void replaceSearchFragment(Fragment fragment) {
         FragmentTransaction transaction = ((MainActivity) getActivity()).getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onItemSelected(View v, int recipeID) {
+        InputMethodManager imm = (InputMethodManager) ((MainActivity) getActivity()).getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
+
+        replaceSearchFragment(new WebViewFragment(String.valueOf(recipeID)));
+
+        et_input.clearFocus();
     }
 }

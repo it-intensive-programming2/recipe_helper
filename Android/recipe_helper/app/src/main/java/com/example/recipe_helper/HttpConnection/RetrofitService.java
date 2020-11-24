@@ -1,12 +1,10 @@
 package com.example.recipe_helper.HttpConnection;
 
-<<<<<<< HEAD
-import com.example.recipe_helper.Commnuity.DataFrame.PostResponse;
-=======
 import com.example.recipe_helper.Commnuity.DataFrame.Comments2Response;
-import com.example.recipe_helper.Commnuity.DataFrame.Post2Response;
->>>>>>> 67d32ce82fe543fbb55b30c25b2d53c1a4312f43
+import com.example.recipe_helper.Commnuity.DataFrame.PostResponse;
+import com.example.recipe_helper.DataFrame.IngredientResponse;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.example.recipe_helper.DataFrame.UserInfoResponse;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -26,23 +24,23 @@ public interface RetrofitService {
     Call<RecipeResponse> getText(@Query("recipeName") String recipeName, @Query("ingredientName") String ingredientName);
 
     @GET("/recipe/checkUser")
-    Call<BaseResponse> checkUser(@Query("id") long id);
+    Call<UserInfoResponse> checkUser(@Query("id") long id);
 
     @POST("recipe/signUp")
     Call<BaseResponse> signUp(@Body JsonObject body);
 
     @GET("recipe/loadPost")
-<<<<<<< HEAD
     Call<PostResponse> loadPost();
 
     @GET("recipe/uploadPost")
     Call<BaseResponse> uploadPost(@Query("id") long id, @Query("content") String content, @Query("title") String title);
-=======
-    Call<Post2Response> loadPost();
 
     @GET("recipe/loadComment")
     Call<Comments2Response> loadComment(@Query("postID") int postID);
 
+    @GET("recipe/searchRecipe")
+    Call<RecipeResponse> searchRecipe(@Query("recipeTitle") String recipeTitle);
 
->>>>>>> 67d32ce82fe543fbb55b30c25b2d53c1a4312f43
+    @GET("recipe/searchIngredient")
+    Call<IngredientResponse> searchIngredient(@Query("ingredientName") String ingredientName);
 }
