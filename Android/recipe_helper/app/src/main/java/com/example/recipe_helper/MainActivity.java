@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private Community_main community_main;
     private Community_comment community_comment;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private View nav_view;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -80,8 +81,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     };
 
 
-
-
     @Override
 
 
@@ -105,7 +104,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         super.onCreate(savedInstanceState);
 
 
-
         Intent intent = getIntent();
         user = (UserInfo) intent.getSerializableExtra("OBJECT");
 
@@ -115,16 +113,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         checkUser();
 
         home = new Home();
-        refrigerator = new Refrigerator();
         scrap = new Scrap();
         my_page = new MyPage();
+        refrigerator = new Refrigerator();
         community_main = new Community_main();
         community_comment = new Community_comment();
+
+        nav_view = findViewById(R.id.nav_view);
 
         navigation = findViewById(R.id.nav_bar);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_home);
-
 
 
         getAppKeyHash();
@@ -141,13 +140,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
 
-
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
         transaction.replace(R.id.fragment_main, fragment);
         FragmentManager manager = getSupportFragmentManager();
         manager.popBackStackImmediate();
+        transaction.commit();
+    }
+
+    public void replaceFragmentAddBackStack(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+        transaction.replace(R.id.fragment_main, fragment);
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -211,5 +217,15 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    public void setNavigationVisible(boolean visible) {
+        if (visible) {
+            nav_view.setVisibility(View.VISIBLE);
+            navigation.setVisibility(View.VISIBLE);
+        } else {
+            nav_view.setVisibility(View.GONE);
+            navigation.setVisibility(View.GONE);
+        }
     }
 }

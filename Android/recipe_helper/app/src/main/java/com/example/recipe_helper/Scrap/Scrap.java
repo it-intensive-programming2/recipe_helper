@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.example.recipe_helper.Home.WebViewFragment;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
+import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
@@ -46,6 +48,11 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
         recyclerView1.setAdapter(adapter);
 
         return view;
+    }
+
+    @Override
+    public void onItemSelected2(View v, int recipeID) {
+        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID)));
     }
 
     @Override

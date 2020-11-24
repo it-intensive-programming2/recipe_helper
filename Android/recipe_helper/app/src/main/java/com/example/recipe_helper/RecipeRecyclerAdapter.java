@@ -1,6 +1,7 @@
-package com.example.recipe_helper.Home.Adapter;
+package com.example.recipe_helper;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.recipe_helper.DataFrame.RecipeData;
-import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
 
-public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Holder> {
+public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAdapter.Holder> {
     private ArrayList<RecipeData> list = new ArrayList<RecipeData>();
     private Context context;
     private OnListItemSelectedInterface mListener;
 
-    public RecommendAdapter(Context context, ArrayList<RecipeData> list, RecommendAdapter.OnListItemSelectedInterface listener) {
+    public RecipeRecyclerAdapter(Context context, ArrayList<RecipeData> list, RecipeRecyclerAdapter.OnListItemSelectedInterface listener) {
         this.context = context;
         this.list = list;
         this.mListener = listener;
@@ -33,9 +33,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Hold
 
     @NonNull
     @Override
-    public RecommendAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecipeRecyclerAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_recycler_item, parent, false);
-        RecommendAdapter.Holder holder = new RecommendAdapter.Holder(view);
+        RecipeRecyclerAdapter.Holder holder = new RecipeRecyclerAdapter.Holder(view);
 
         return holder;
     }
@@ -79,14 +79,19 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.Hold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendAdapter.Holder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecipeRecyclerAdapter.Holder holder, final int position) {
         holder.title.setText(list.get(position).title);
-        holder.ingredient.setText(list.get(position).ingredientList);
-        holder.author.setText(list.get(position).author);
+        holder.author.setText("by " + list.get(position).author);
         holder.cat1.setText(list.get(position).cat1);
         holder.cat2.setText(list.get(position).cat2);
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
+
+        String ingredient = list.get(position).ingredientList;
+        ingredient = ingredient.replace("]", "");
+        ingredient = ingredient.replace("[", "");
+        ingredient = ingredient.replace("'", "");
+        holder.ingredient.setText(ingredient);
 
         Glide.with(context).load(list.get(position).photo).into(holder.recipeImage);
 

@@ -8,10 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="15dp"
+        android:paddingVertical="8dp"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -25,7 +22,7 @@
             android:id="@+id/comment_user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="User_id"
             android:textSize="13sp"
@@ -38,7 +35,7 @@
             android:id="@+id/comment_user_say"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="Hi Thisis Johnson Kium Hi Thisis Johnson Kium Hi Thisis Johnson Kium Hi Thisis Johnson Kium Hi Thisis Johnson Kium"
             android:textSize="13sp"

@@ -1,5 +1,7 @@
 package com.example.recipe_helper.Commnuity;
 
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -52,7 +54,7 @@ public class Community_comment extends Fragment {
 
     private UserInfo user;
 
-    public static Community_comment newInstance(String user_id, String user_pic, String post_content,  int postID) {
+    public static Community_comment newInstance(String user_id, String user_pic, String post_content, int postID) {
         // 나중에 댓글
         Bundle args = new Bundle();
         args.putString("id", user_id);
@@ -91,7 +93,13 @@ public class Community_comment extends Fragment {
 
         writer_id.setText(id);
         writer_post.setText(content);
+
+        writer_img.setBackground(new ShapeDrawable(new OvalShape()));
+        writer_img.setClipToOutline(true);
         Glide.with(getContext()).load(pic).into(writer_img);
+
+        user_img.setBackground(new ShapeDrawable(new OvalShape()));
+        user_img.setClipToOutline(true);
         Glide.with(getContext()).load(user.profileUrl).into(user_img);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);

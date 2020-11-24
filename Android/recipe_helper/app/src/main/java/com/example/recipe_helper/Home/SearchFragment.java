@@ -16,19 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipe_helper.DataFrame.RecipeData;
-import com.example.recipe_helper.Home.Adapter.RecommendAdapter;
-import com.example.recipe_helper.Home.Adapter.SearchAdapter;
+import com.example.recipe_helper.RecipeRecyclerAdapter;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment implements RecommendAdapter.OnListItemSelectedInterface {
+public class SearchFragment extends Fragment implements RecipeRecyclerAdapter.OnListItemSelectedInterface {
 
     private static final String TAG = SearchFragment.class.getName();
     private String recipe_name;
     private ArrayList<RecipeData> list;
-    private RecommendAdapter adapter;
+    private RecipeRecyclerAdapter adapter;
 
     public SearchFragment(String recipe_name, ArrayList<RecipeData> list) {
         this.recipe_name = recipe_name;
@@ -50,14 +49,8 @@ public class SearchFragment extends Fragment implements RecommendAdapter.OnListI
             }
         });
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionbar.setDisplayShowCustomEnabled(true);
-        actionbar.setDisplayHomeAsUpEnabled(true);
-
-        adapter = new RecommendAdapter(getContext(), list, this);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.comment_recycler_view);
+        adapter = new RecipeRecyclerAdapter(getContext(), list, this);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

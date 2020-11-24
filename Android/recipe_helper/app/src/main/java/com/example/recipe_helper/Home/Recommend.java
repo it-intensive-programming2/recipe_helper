@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,20 +11,19 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipe_helper.DataFrame.RecipeData;
-import com.example.recipe_helper.Home.Adapter.RecommendAdapter;
+import com.example.recipe_helper.RecipeRecyclerAdapter;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
 
-public class Recommend extends Fragment implements RecommendAdapter.OnListItemSelectedInterface {
+public class Recommend extends Fragment implements RecipeRecyclerAdapter.OnListItemSelectedInterface {
 
-    private RecommendAdapter adapter;
+    private RecipeRecyclerAdapter adapter;
     private ArrayList<RecipeData> list = new ArrayList<>();
 
     public Recommend(ArrayList<RecipeData> list) {
@@ -38,13 +36,13 @@ public class Recommend extends Fragment implements RecommendAdapter.OnListItemSe
         View view = inflater.inflate(R.layout.home_recommend, container, false);
         view.setClickable(true);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionbar.setDisplayShowCustomEnabled(true);
-        actionbar.setDisplayHomeAsUpEnabled(true);
+//        Toolbar toolbar = view.findViewById(R.id.toolbar);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+//        actionbar.setDisplayShowCustomEnabled(true);
+//        actionbar.setDisplayHomeAsUpEnabled(true);
 
-        adapter = new RecommendAdapter(getContext(), list, this);
+        adapter = new RecipeRecyclerAdapter(getContext(), list, this);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
 

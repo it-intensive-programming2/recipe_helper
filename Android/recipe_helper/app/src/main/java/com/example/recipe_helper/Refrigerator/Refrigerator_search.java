@@ -22,6 +22,7 @@ import com.example.recipe_helper.DataFrame.IngredientData;
 import com.example.recipe_helper.DataFrame.IngredientResponse;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
+import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class Refrigerator_search extends Fragment implements SearchAdapter.OnLis
     private Realm realm;
 
     private EditText et_input;
-    private ImageView search_icon;
     private ArrayList<IngredientData> list = new ArrayList<IngredientData>();
     private SearchAdapter adapter;
     private InputMethodManager imm;
@@ -49,8 +49,6 @@ public class Refrigerator_search extends Fragment implements SearchAdapter.OnLis
         realm = Realm.getDefaultInstance();
 
         et_input = view.findViewById(R.id.et_input);
-        search_icon = view.findViewById(R.id.search_icon);
-
         et_input.requestFocus();
 
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

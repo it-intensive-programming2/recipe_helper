@@ -1,7 +1,5 @@
 package com.example.recipe_helper.Commnuity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -15,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recipe_helper.Commnuity.Adapter.PostAdapter;
 import com.example.recipe_helper.Commnuity.DataFrame.Post;
@@ -41,8 +38,6 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
         View view = inflater.inflate(R.layout.feed_commnunity, container, false);
         view.setClickable(true);
 
-        loadPost();
-
         adapter = new PostAdapter(getContext(), post_list, this, this);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.community_recycler);
         recyclerView.setHasFixedSize(true);
@@ -54,10 +49,9 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
         view.findViewById(R.id.background).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragmentFull(new Create_post());
+                ((MainActivity) getActivity()).replaceFragmentAddBackStack(new Create_post());
             }
         });
-
 
 
         return view;
@@ -78,11 +72,9 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
                     }
                     //Todo
                     ArrayList<Post> results = result.body;
-
                     post_list.clear();
                     post_list.addAll(results);
                     adapter.notifyDataSetChanged();
-
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
                 }
@@ -98,17 +90,14 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
         });
     }
 
-
-    @SuppressLint("ResourceType")
     @Override
     public void onItemSelected(View v, String id, String img, String content, int postID) {
-        ((MainActivity) getActivity()).replaceFragmentFull(Community_comment.newInstance(id, img, content,postID));
+        ((MainActivity) getActivity()).replaceFragmentFull(Community_comment.newInstance(id, img, content, postID));
     }
 
     @Override
     public void onResume() {
-        loadPost();
-        Log.d("RHC", "onResume: post on resuer");
         super.onResume();
+        loadPost();
     }
 }

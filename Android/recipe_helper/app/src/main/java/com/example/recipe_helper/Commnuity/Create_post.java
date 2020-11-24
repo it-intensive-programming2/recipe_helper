@@ -44,9 +44,10 @@ public class Create_post extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.post_writing, container, false);
-
         view.setClickable(true);
         setHasOptionsMenu(true);
+        ((MainActivity) getActivity()).setNavigationVisible(false);
+
         imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
 
         user = ((MainActivity) getActivity()).user;
@@ -133,7 +134,7 @@ public class Create_post extends Fragment {
 
                     imm.hideSoftInputFromWindow(tv_content.getWindowToken(), 0);
                     imm.hideSoftInputFromWindow(tv_title.getWindowToken(), 0);
-
+                    ((MainActivity) getActivity()).setNavigationVisible(true);
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
                 Log.d(TAG, "onOptionsItemSelected: ");

@@ -59,4 +59,6 @@ public interface RetrofitService {
     @GET("recipe/loadRecommendRecipe3")
     Call<RecipeResponse> loadRecommendRecipe3();
 
+    @GET("recipe/changeUserInfo")
+    Call<UserInfoResponse> changeUserInfo(@Query("userID") long userID, @Query("allergy") String allergy, @Query("disease") String disease);
 }

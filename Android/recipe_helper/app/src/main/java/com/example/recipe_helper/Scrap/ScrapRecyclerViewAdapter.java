@@ -14,30 +14,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.R;
+import com.example.recipe_helper.RecipeRecyclerAdapter;
 
 import java.util.ArrayList;
 
 public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecyclerViewAdapter.Holder> {
-
-    private ArrayList<RecipeData> list;
-    private OnListItemSelectedInterface mlistener;
+    private ArrayList<RecipeData> list = new ArrayList<RecipeData>();
     private Context context;
+    private OnListItemSelectedInterface mListener;
 
-    public ScrapRecyclerViewAdapter(Context context, ArrayList<RecipeData> list, OnListItemSelectedInterface mlistener) {
+    public ScrapRecyclerViewAdapter(Context context, ArrayList<RecipeData> list, OnListItemSelectedInterface listener) {
         this.context = context;
         this.list = list;
-        this.mlistener = mlistener;
+        this.mListener = listener;
     }
 
     public interface OnListItemSelectedInterface {
+        void onItemSelected2(View v, int recipeID);
+
         void onItemSelected(View v, int position);
     }
 
     @NonNull
     @Override
-    public ScrapRecyclerViewAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.scrap_recycler_item, parent, false);
-        ScrapRecyclerViewAdapter.Holder holder = new ScrapRecyclerViewAdapter.Holder(view);
+        Holder holder = new Holder(view);
 
         return holder;
     }
@@ -48,38 +50,63 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
     }
 
     public class Holder extends RecyclerView.ViewHolder {
-
-        protected ImageView scrap_img;
-        protected ImageView scrap_star;
-        protected TextView scrap_recipe_name;
-        protected TextView scrap_recipe_owner;
-        protected LinearLayout link;
+        protected TextView title;
+        protected TextView ingredient;
+        protected TextView author;
+        protected TextView cat1;
+        protected TextView cat2;
+        protected TextView time;
+        protected TextView level;
+        protected ImageView recipeImage;
+        protected ImageView scrapStar;
 
 
         public Holder(View view) {
             super(view);
-            this.scrap_img = (ImageView) view.findViewById(R.id.scrap_img);
-            this.scrap_star = (ImageView) view.findViewById(R.id.scrap_star);
-            this.scrap_recipe_name = (TextView) view.findViewById(R.id.scrap_recipe_name);
-            this.scrap_recipe_owner = (TextView) view.findViewById(R.id.scrap_recipe_owner);
-            this.link = (LinearLayout) view.findViewById(R.id.scrap_layout);
+            this.title = (TextView) view.findViewById(R.id.title);
+            this.ingredient = (TextView) view.findViewById(R.id.ingredient);
+            this.author = (TextView) view.findViewById(R.id.author);
+            this.cat1 = (TextView) view.findViewById(R.id.cat1);
+            this.cat2 = (TextView) view.findViewById(R.id.cat2);
+            this.time = (TextView) view.findViewById(R.id.time);
+            this.level = (TextView) view.findViewById(R.id.level);
+            this.scrapStar = (ImageView) view.findViewById(R.id.scrap_star);
 
-            /* clicked star */
-            scrap_star.setOnClickListener(new View.OnClickListener() {
+            this.recipeImage = (ImageView) view.findViewById(R.id.recipe_image);
+
+            recipeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mlistener.onItemSelected(v, getAdapterPosition());
+                    mListener.onItemSelected2(v, list.get(getAdapterPosition()).recipeID);
                 }
             });
+
+            scrapStar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemSelected(v, getAdapterPosition());
+                }
+            });
+
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScrapRecyclerViewAdapter.Holder holder, final int position) {
+    public void onBindViewHolder(@NonNull Holder holder, final int position) {
+        holder.title.setText(list.get(position).title);
+        holder.author.setText("by " + list.get(position).author);
+        holder.cat1.setText(list.get(position).cat1);
+        holder.cat2.setText(list.get(position).cat2);
+        holder.time.setText(list.get(position).time);
+        holder.level.setText(list.get(position).level);
 
-        Glide.with(context).load(list.get(position).photo).into(holder.scrap_img);
-        holder.scrap_recipe_name.setText(list.get(position).title);
-        holder.scrap_recipe_owner.setText(list.get(position).author);
+        String ingredient = list.get(position).ingredientList;
+        ingredient = ingredient.replace("]", "");
+        ingredient = ingredient.replace("[", "");
+        ingredient = ingredient.replace("'", "");
+        holder.ingredient.setText(ingredient);
+
+        Glide.with(context).load(list.get(position).photo).into(holder.recipeImage);
 
         holder.itemView.setTag(position);
     }

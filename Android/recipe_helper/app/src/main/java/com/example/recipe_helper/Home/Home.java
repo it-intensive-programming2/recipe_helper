@@ -97,7 +97,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         more_info1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragment(new Recommend(list1));
+                ((MainActivity) getActivity()).replaceFragmentFull(new Recommend(list1));
             }
         });
 
@@ -130,7 +130,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         more_info2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragment(new Recommend(list2));
+                ((MainActivity) getActivity()).replaceFragmentFull(new Recommend(list2));
             }
         });
 
