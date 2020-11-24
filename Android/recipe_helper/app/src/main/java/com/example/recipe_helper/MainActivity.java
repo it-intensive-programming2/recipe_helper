@@ -1,20 +1,27 @@
 package com.example.recipe_helper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recipe_helper.Commnuity.Community_comment;
 import com.example.recipe_helper.Commnuity.Community_main;
@@ -33,7 +40,7 @@ import java.security.MessageDigest;
 
 import retrofit2.Call;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = MainActivity.class.getName();
     public UserInfo user;
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private Scrap scrap;
     private Community_main community_main;
     private Community_comment community_comment;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,15 +79,38 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+
+
     @Override
+
+
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
+//        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.);
+//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                //새로고침 작업 실행...
+//
+//                mSwipeRefreshLayout.setRefreshing(false);
+//
+//            }
+//        });
+
+
+        super.onCreate(savedInstanceState);
+
+
 
         Intent intent = getIntent();
         user = (UserInfo) intent.getSerializableExtra("OBJECT");
 
         Log.d(TAG, "userinfo" + user.userID);
+
 
         checkUser();
 
@@ -94,8 +125,22 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_home);
 
+
+
         getAppKeyHash();
     }
+
+    public void onRefresh() {
+        Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 2000);
+    }
+
+
 
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

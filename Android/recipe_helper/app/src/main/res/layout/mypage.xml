@@ -41,7 +41,9 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingVertical="15dp"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
 
                 <ImageView
                     android:id="@+id/profile"
@@ -206,6 +208,7 @@
                 tools:ignore="MissingConstraints">
 
                 <TextView
+                    android:id="@+id/mypage_user_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="님의 취향분석"
@@ -213,6 +216,7 @@
 
                 <ImageView
                     android:id="@+id/wordcloud"
+                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="1"
@@ -222,30 +226,37 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
-                android:paddingTop="15dp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_5">
+                app:layout_constraintTop_toBottomOf="@id/ll_5"
+                app:layout_constraintVertical_bias="1.0"
+                tools:layout_editor_absoluteX="0dp">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="회원 탈퇴" />
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="문의하기" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:text="정보 수정" />
 
             </LinearLayout>

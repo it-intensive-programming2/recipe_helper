@@ -20,6 +20,7 @@ public class UserInfo extends RealmObject implements Serializable {
     }
 
     public UserInfo(long userID, String nickName, String accessToken, String email, String profileUrl, String gender, String ageRange, long expTime, String allergy, String disease) {
+
         this.userID = userID;
         this.accessToken = accessToken;
         this.nickName = nickName;

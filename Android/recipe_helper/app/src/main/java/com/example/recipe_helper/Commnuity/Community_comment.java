@@ -52,7 +52,7 @@ public class Community_comment extends Fragment {
 
     private UserInfo user;
 
-    public static Community_comment newInstance(String user_id, String user_pic, String post_content, int postID) {
+    public static Community_comment newInstance(String user_id, String user_pic, String post_content,  int postID) {
         // 나중에 댓글
         Bundle args = new Bundle();
         args.putString("id", user_id);
@@ -87,10 +87,12 @@ public class Community_comment extends Fragment {
         TextView writer_id = view.findViewById(R.id.writer_id);
         TextView writer_post = view.findViewById(R.id.writer_post);
         ImageView writer_img = view.findViewById(R.id.writer_img);
+        ImageView user_img = view.findViewById(R.id.user_img);
 
         writer_id.setText(id);
         writer_post.setText(content);
         Glide.with(getContext()).load(pic).into(writer_img);
+        Glide.with(getContext()).load(user.profileUrl).into(user_img);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
