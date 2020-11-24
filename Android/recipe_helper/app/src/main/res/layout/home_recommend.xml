@@ -4,42 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_gray">
+    android:background="@color/white_gray"
+    android:padding="15dp">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white_gray"
-        android:paddingHorizontal="10dp">
+        android:background="@color/white_gray">
 
-        <LinearLayout
-            android:id="@+id/search_layout"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white_gray"
-            android:orientation="horizontal"
-            android:paddingHorizontal="15dp">
-
-            <TextView
-                android:id="@+id/tv_input"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                android:padding="15dp"
-                android:textSize="17sp" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_search_24" />
-        </LinearLayout>
+            app:layout_collapseMode="pin"
+            app:title="나에게 맞는 추천" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/title_ll1"
+        android:layout_marginHorizontal="5dp"
         android:overScrollMode="never"
         android:scrollbarFadeDuration="0"
         android:scrollbarSize="5dp"
