@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -81,6 +82,14 @@ public class Search extends Fragment implements SearchAdapter.OnListItemSelected
             public void afterTextChanged(Editable editable) {
                 String text = et_input.getText().toString();
                 search(text);
+            }
+        });
+
+        ImageView search_icon = view.findViewById(R.id.search_icon);
+        search_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).replaceFragmentFull(new SearchFragment(et_input.getText().toString(), list));
             }
         });
 
