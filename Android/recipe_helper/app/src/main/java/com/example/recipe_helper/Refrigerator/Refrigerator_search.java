@@ -1,28 +1,44 @@
 package com.example.recipe_helper.Refrigerator;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipe_helper.DataFrame.IngredientData;
+import com.example.recipe_helper.DataFrame.IngredientResponse;
+import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
+import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.R;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
+import retrofit2.Call;
 
-public class Refrigerator_search extends Fragment {
+public class Refrigerator_search extends Fragment implements SearchAdapter.OnListItemSelectedInterface {
 
+    private static final String TAG = Refrigerator_search.class.getName();
     private Realm realm;
 
     private EditText et_input;
     private ImageView search_icon;
+    private ArrayList<IngredientData> list = new ArrayList<IngredientData>();
+    private SearchAdapter adapter;
+    private InputMethodManager imm;
 
     @Nullable
     @Override
@@ -35,17 +51,69 @@ public class Refrigerator_search extends Fragment {
         et_input = view.findViewById(R.id.et_input);
         search_icon = view.findViewById(R.id.search_icon);
 
-        search_icon.setOnClickListener(new View.OnClickListener() {
+        et_input.requestFocus();
+
+        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+
+        adapter = new SearchAdapter(getContext(), list, this);
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager1);
+        recyclerView.setAdapter(adapter);
+
+        et_input.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                if (et_input.getText().toString().equals("")) et_input.setError("재료를 입력하세요");
-                else {
-                    addIngredient(et_input.getText().toString());
-                }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String text = et_input.getText().toString();
+                search(text);
             }
         });
 
         return view;
+    }
+
+    private void search(String query) {
+        list.clear();
+        if (query.equals("")) {
+            adapter.notifyDataSetChanged();
+            return;
+        }
+
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<IngredientResponse> call = service.searchIngredient(query);
+
+        call.enqueue(new retrofit2.Callback<IngredientResponse>() {
+            @Override
+            public void onResponse(Call<IngredientResponse> call, retrofit2.Response<IngredientResponse> response) {
+                if (response.isSuccessful()) {
+                    IngredientResponse result = response.body();
+                    list.clear();
+                    list.addAll(result.body);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IngredientResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     public void addIngredient(final String name) {
@@ -54,19 +122,27 @@ public class Refrigerator_search extends Fragment {
             public void execute(Realm realm) {
                 IngredientData ingredientData = realm.createObject(IngredientData.class);
 
-                ingredientData.ig_name = name;
-                ingredientData.ig_profile = "이미지";
+                ingredientData.name = name;
+                ingredientData.image = "이미지";
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
-                Log.d("NDH", "onSuccess: Realm");
+                Log.d(TAG, "onSuccess: Realm");
             }
         }, new Realm.Transaction.OnError() {
             @Override
             public void onError(Throwable error) {
-                Log.d("NDH", "onError: Realm");
+                Log.d(TAG, "onError: Realm");
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(View v, String ingredient_name) {
+        addIngredient(ingredient_name);
+        imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
+
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

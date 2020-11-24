@@ -2,7 +2,6 @@ package com.example.recipe_helper.Commnuity.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,22 +22,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
     private ArrayList<Post> post_list;
     private Context context;
-    private OnListItemSelectedInterface mlistener;
-    private OnListItemSelectedInterface plistener;
+    private OnListItemSelectedInterface mListener;
 
     public PostAdapter(Context context, ArrayList<Post> list, OnListItemSelectedInterface mlistener, OnListItemSelectedInterface plistener) {
 
         this.post_list = list;
         this.context = context;
-        this.mlistener = mlistener;
-        this.plistener = plistener;
+        this.mListener = mlistener;
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, String user_id, String user_pic, String post_content);
+        void onItemSelected(View v, String user_id, String user_pic, String post_content, int postID);
 
         //니중에 img_src 필요
-       // void upload_onItemSelected(View v);
+        // void upload_onItemSelected(View v);
     }
 
     public class PostViewHolder extends RecyclerView.ViewHolder {
@@ -50,6 +47,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         protected ImageView heart;
         protected ImageView balloon;
         protected ImageView background;
+        protected int postID;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -94,24 +92,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.post_title.setText(post_list.get(position).getTitle());
 
         try {
-            readMoreOption.addReadMoreTo(holder.post_content, post_list.get(position).getPost_content());
-        } catch(NullPointerException e){}
+            readMoreOption.addReadMoreTo(holder.post_content, post_list.get(position).getContent());
+        } catch (NullPointerException e) {
+        }
 
-        holder.post_content.setText(post_list.get(position).getPost_content());
+        holder.post_content.setText(post_list.get(position).getContent());
 
         holder.balloon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mlistener.onItemSelected(v, post_list.get(position).getWriterNickname(), post_list.get(position).getWriterProfileUrl(), post_list.get(position).getPost_content());
+                mListener.onItemSelected(v, post_list.get(position).getWriterNickname(), post_list.get(position).getWriterProfileUrl(), post_list.get(position).getContent(), post_list.get(position).getPostID());
 
             }
         });
         holder.extend_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mlistener.onItemSelected(v, post_list.get(position).getWriterNickname(), post_list.get(position).getWriterProfileUrl(), post_list.get(position).getPost_content());
+                mListener.onItemSelected(v, post_list.get(position).getWriterNickname(), post_list.get(position).getWriterProfileUrl(), post_list.get(position).getContent(), post_list.get(position).getPostID());
             }
         });
+
+        holder.postID = post_list.get(position).getPostID();
     }
 
     @Override

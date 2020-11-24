@@ -38,9 +38,25 @@ public interface RetrofitService {
     @GET("recipe/loadComment")
     Call<Comments2Response> loadComment(@Query("postID") int postID);
 
+    @GET("recipe/uploadComment")
+    Call<BaseResponse> uploadComment(@Query("id") long userID, @Query("postID") int postID, @Query("content") String content);
+
     @GET("recipe/searchRecipe")
     Call<RecipeResponse> searchRecipe(@Query("recipeTitle") String recipeTitle);
 
     @GET("recipe/searchIngredient")
     Call<IngredientResponse> searchIngredient(@Query("ingredientName") String ingredientName);
+
+    @GET("recipe/loadHotRecipe")
+    Call<RecipeResponse> loadHotRecipe();
+
+    @GET("recipe/loadRecommendRecipe1")
+    Call<RecipeResponse> loadRecommendRecipe1();
+
+    @GET("recipe/loadRecommendRecipe2")
+    Call<RecipeResponse> loadRecommendRecipe2();
+
+    @GET("recipe/loadRecommendRecipe3")
+    Call<RecipeResponse> loadRecommendRecipe3();
+
 }

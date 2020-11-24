@@ -28,7 +28,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, String recipe_url);
+        void onItemSelected(View v, int recipeID);
     }
 
     @NonNull
@@ -48,11 +48,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public class Holder extends RecyclerView.ViewHolder {
         protected TextView title1;
         protected ImageView image1;
-        protected String recipe_url1;
+        protected int recipeID1;
 
         protected TextView title2;
         protected ImageView image2;
-        protected String recipe_url2;
+        protected int recipeID2;
 
         public Holder(View view) {
             super(view);
@@ -64,14 +64,14 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             image1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, recipe_url1);
+                    mListener.onItemSelected(v, recipeID1);
                 }
             });
 
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, recipe_url2);
+                    mListener.onItemSelected(v, recipeID2);
                 }
             });
         }
@@ -79,14 +79,14 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull HomeRecyclerViewAdapter.Holder holder, final int position) {
-        holder.title1.setText(list.get(position).recipe1.recipe_name);
-        holder.title2.setText(list.get(position).recipe2.recipe_name);
+        holder.title1.setText(list.get(position).recipe1.title);
+        holder.title2.setText(list.get(position).recipe2.title);
 
-        Glide.with(context).load(list.get(position).recipe1.img_url).into(holder.image1);
-        Glide.with(context).load(list.get(position).recipe2.img_url).into(holder.image2);
+        Glide.with(context).load(list.get(position).recipe1.photo).into(holder.image1);
+        Glide.with(context).load(list.get(position).recipe2.photo).into(holder.image2);
 
-        holder.recipe_url1 = list.get(position).recipe1.recipe_url;
-        holder.recipe_url2 = list.get(position).recipe2.recipe_url;
+        holder.recipeID1 = list.get(position).recipe1.recipeID;
+        holder.recipeID2 = list.get(position).recipe2.recipeID;
 
         holder.itemView.setTag(position);
     }

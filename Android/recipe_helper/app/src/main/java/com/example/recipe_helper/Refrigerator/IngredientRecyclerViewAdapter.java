@@ -46,7 +46,7 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 //        holder.ingredient_image.setImageBitmap(arrayList.get(position).ig_profile);
         holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(ic_apple));
-        holder.ingredient_name.setText(arrayList.get(position).ig_name);
+        holder.ingredient_name.setText(arrayList.get(position).name);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            IngredientData ingredientData = realm.where(IngredientData.class).equalTo("ig_name", arrayList.get(position).ig_name).findFirst();
+                            IngredientData ingredientData = realm.where(IngredientData.class).equalTo("ig_name", arrayList.get(position).name).findFirst();
                             arrayList.remove(position);
                             notifyItemRemoved(position);
                             ingredientData.deleteFromRealm();

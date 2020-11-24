@@ -1,5 +1,6 @@
 package com.example.recipe_helper.Commnuity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,8 +57,6 @@ public class Create_post extends Fragment {
         tv_title.requestFocus();
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-        imm.showSoftInput(tv_title, 0);
-
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -89,7 +88,7 @@ public class Create_post extends Fragment {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
-                Toast.makeText(getContext(),"연결실패", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "연결실패", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
@@ -121,24 +120,23 @@ public class Create_post extends Fragment {
                 status_1 = content.isEmpty();
                 status_2 = title.isEmpty();
 
-                if(status_1) {
+                if (status_1) {
                     tv_content.setError("내용을 입력해 주세요");
                 }
 
-                if(status_2 ) {
+                if (status_2) {
                     tv_title.setError("제목을 입력해 주세요");
                 }
 
-                if(!(status_1 || status_2)) {
-                    Upload_post(user.id, content, title);
-
+                if (!(status_1 || status_2)) {
+                    Upload_post(user.userID, content, title);
 
                     imm.hideSoftInputFromWindow(tv_content.getWindowToken(), 0);
                     imm.hideSoftInputFromWindow(tv_title.getWindowToken(), 0);
 
                     getActivity().getSupportFragmentManager().popBackStack();
                 }
-                Log.d("RHC", "onOptionsItemSelected: ");
+                Log.d(TAG, "onOptionsItemSelected: ");
         }
         return super.onOptionsItemSelected(item);
     }

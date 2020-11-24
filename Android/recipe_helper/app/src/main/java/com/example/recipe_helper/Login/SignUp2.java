@@ -52,12 +52,12 @@ public class SignUp2 extends Fragment {
 
     public void signUp() {
         JsonObject paramObject = new JsonObject();
-        paramObject.addProperty("id", user.id);
+        paramObject.addProperty("id", user.userID);
         paramObject.addProperty("nickName", user.nickName);
         paramObject.addProperty("email", user.email);
         paramObject.addProperty("gender", user.gender);
         paramObject.addProperty("ageRange", user.ageRange);
-        paramObject.addProperty("profileUrl", user.profileImageUrl);
+        paramObject.addProperty("profileUrl", user.profileUrl);
         paramObject.addProperty("allergy", allergyInfo);
         paramObject.addProperty("disease", diseaseInfo);
 

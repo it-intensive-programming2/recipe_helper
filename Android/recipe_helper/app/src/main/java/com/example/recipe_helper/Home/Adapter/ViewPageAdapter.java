@@ -11,21 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-import com.example.recipe_helper.Home.Dataframe.HomeRecipeFrame;
+import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.R;
 
 import java.util.ArrayList;
 
 public class ViewPageAdapter extends PagerAdapter {
     private Context mContext;
-    private ArrayList<HomeRecipeFrame> list;
+    private ArrayList<RecipeData> list;
     private OnListItemSelectedInterface mListener;
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, String recipe_url);
+        void onItemSelected(View v, int recipeID);
     }
 
-    public ViewPageAdapter(Context context, ArrayList<HomeRecipeFrame> list, OnListItemSelectedInterface mListener) {
+    public ViewPageAdapter(Context context, ArrayList<RecipeData> list, OnListItemSelectedInterface mListener) {
         this.mContext = context;
         this.list = list;
         this.mListener = mListener;
@@ -36,18 +36,18 @@ public class ViewPageAdapter extends PagerAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.home_view_page, null);
 
-        final String recipe_url;
+        final int recipeID;
         TextView recipe_name = view.findViewById(R.id.recipe_name);
         ImageView imageView = view.findViewById(R.id.imageView);
 
-        recipe_url = list.get(position).recipe_url;
-        Glide.with(mContext).load(list.get(position).img_url).into(imageView);
-        recipe_name.setText(list.get(position).recipe_name);
+        recipeID = list.get(position).recipeID;
+        Glide.with(mContext).load(list.get(position).photo).into(imageView);
+        recipe_name.setText(list.get(position).title);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onItemSelected(v, recipe_url);
+                mListener.onItemSelected(v, recipeID);
             }
         });
 
@@ -61,7 +61,7 @@ public class ViewPageAdapter extends PagerAdapter {
         return list.size();
     }
 
-    public void refresh(ArrayList<HomeRecipeFrame> items) {
+    public void refresh(ArrayList<RecipeData> items) {
         this.list = items;
         notifyDataSetChanged();
     }

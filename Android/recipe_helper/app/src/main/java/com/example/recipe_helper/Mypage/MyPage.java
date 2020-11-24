@@ -18,8 +18,6 @@ import com.example.recipe_helper.DataFrame.UserInfo;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 
-import org.w3c.dom.Text;
-
 public class MyPage extends Fragment {
     private int user_state = 0;
     private ImageView iv;
@@ -79,10 +77,10 @@ public class MyPage extends Fragment {
 
         profile.setBackground(new ShapeDrawable(new OvalShape()));
         profile.setClipToOutline(true);
-        Glide.with(this).load(user.profileImageUrl).into(profile);
+        Glide.with(this).load(user.profileUrl).into(profile);
         username.setText(user.nickName);
         useremail.setText(user.email);
-        userage.setText(user.ageRange);
+        userage.setText(user.ageRange + "대");
         usergender.setText(user.gender);
 
         //Todo Something

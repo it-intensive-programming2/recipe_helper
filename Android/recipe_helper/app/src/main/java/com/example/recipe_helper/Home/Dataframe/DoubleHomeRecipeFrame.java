@@ -1,10 +1,12 @@
 package com.example.recipe_helper.Home.Dataframe;
 
-public class DoubleHomeRecipeFrame {
-    public HomeRecipeFrame recipe1;
-    public HomeRecipeFrame recipe2;
+import com.example.recipe_helper.DataFrame.RecipeData;
 
-    public DoubleHomeRecipeFrame(HomeRecipeFrame recipe1, HomeRecipeFrame recipe2) {
+public class DoubleHomeRecipeFrame {
+    public RecipeData recipe1;
+    public RecipeData recipe2;
+
+    public DoubleHomeRecipeFrame(RecipeData recipe1, RecipeData recipe2) {
         this.recipe1 = recipe1;
         this.recipe2 = recipe2;
     }

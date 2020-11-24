@@ -1,31 +1,15 @@
 package com.example.recipe_helper.Commnuity.DataFrame;
 
-import android.content.Context;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
-import android.view.View;
-import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
-
-import com.example.recipe_helper.R;
-
-import java.util.ArrayList;
-
 public class Post {
     private String writerNickname;
     private String title;
     private String writerProfileUrl;
     private int heart;
     private int comment;
-    private long postID;
+    private int postID;
     private String content;
-    private String post_content;
 
-    public Post(String writerNickname, String title, String writerProfileUrl, int heart, int comment, long postID, String content, String post_content) {
+    public Post(String writerNickname, String title, String writerProfileUrl, int heart, int comment, int postID, String content) {
         this.writerNickname = writerNickname;
         this.title = title;
         this.writerProfileUrl = writerProfileUrl;
@@ -33,7 +17,6 @@ public class Post {
         this.comment = comment;
         this.postID = postID;
         this.content = content;
-        this.post_content = post_content;
     }
 
     public String getWriterNickname() {
@@ -76,12 +59,8 @@ public class Post {
         this.comment = comment;
     }
 
-    public long getPostID() {
+    public int getPostID() {
         return postID;
-    }
-
-    public void setPostID(long postID) {
-        this.postID = postID;
     }
 
     public String getContent() {
@@ -90,13 +69,5 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getPost_content() {
-        return post_content;
-    }
-
-    public void setPost_content(String post_content) {
-        this.post_content = post_content;
     }
 }

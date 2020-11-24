@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         user = (UserInfo) intent.getSerializableExtra("OBJECT");
 
-        Log.d(TAG, "userinfo" + user.id);
+        Log.d(TAG, "userinfo" + user.userID);
 
         checkUser();
 
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkUser() {
         RetrofitService service = RetrofitAdapter.getInstance(this);
-        Call<UserInfoResponse> call = service.checkUser(user.id);
+        Call<UserInfoResponse> call = service.checkUser(user.userID);
 
         call.enqueue(new retrofit2.Callback<UserInfoResponse>() {
             @Override

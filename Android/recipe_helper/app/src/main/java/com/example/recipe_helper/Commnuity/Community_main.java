@@ -97,7 +97,14 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
 
     @SuppressLint("ResourceType")
     @Override
-    public void onItemSelected(View v, String id, String img, String content) {
-        ((MainActivity) getActivity()).replaceFragmentFull(Community_comment.newInstance(id, img, content));
+    public void onItemSelected(View v, String id, String img, String content, int postID) {
+        ((MainActivity) getActivity()).replaceFragmentFull(Community_comment.newInstance(id, img, content,postID));
+    }
+
+    @Override
+    public void onResume() {
+        loadPost();
+        Log.d("RHC", "onResume: post on resuer");
+        super.onResume();
     }
 }

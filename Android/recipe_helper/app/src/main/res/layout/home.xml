@@ -198,6 +198,29 @@
                 android:scrollbarThumbVertical="@android:color/darker_gray"
                 android:scrollbars="vertical"
                 tools:ignore="MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/btn_recommend2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_view2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+            <TextView
+                android:id="@+id/more_info2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recycler_view2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="30dp"
+                android:text="더 보기"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

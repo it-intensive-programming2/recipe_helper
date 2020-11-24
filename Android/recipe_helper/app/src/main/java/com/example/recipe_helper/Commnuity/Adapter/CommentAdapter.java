@@ -11,12 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.recipe_helper.Commnuity.Community_comment;
 import com.example.recipe_helper.Commnuity.DataFrame.Comments;
 import com.example.recipe_helper.R;
-
-import org.w3c.dom.Comment;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -26,8 +22,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     private ArrayList<Comments> comment_list;
     private Context context;
 
-    public CommentAdapter(Context context, ArrayList<Comments> list, Community_comment community_comment){
-
+    public CommentAdapter(Context context, ArrayList<Comments> list) {
         this.comment_list = list;
         this.context = context;
     }
@@ -69,12 +64,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.comment_user_id.setText(comment_list.get(position).writerNickname);
         holder.comment_user_say.setText(comment_list.get(position).content);
         holder.itemView.setTag(position);
-
-
     }
 
     @Override
-    public int getItemCount() { return (null != comment_list ? comment_list.size() : 0); }
+    public int getItemCount() {
+        return (null != comment_list ? comment_list.size() : 0);
+    }
 
 
 }

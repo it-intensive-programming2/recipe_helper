@@ -9,18 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipe_helper.DataFrame.IngredientData;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

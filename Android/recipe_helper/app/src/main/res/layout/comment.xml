@@ -44,8 +44,8 @@
 
             <ImageView
                 android:id="@+id/writer_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/ic_user"
                 app:layout_constraintLeft_toLeftOf="parent"
