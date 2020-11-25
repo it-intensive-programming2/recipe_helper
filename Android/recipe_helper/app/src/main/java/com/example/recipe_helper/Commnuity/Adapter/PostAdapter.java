@@ -2,6 +2,7 @@ package com.example.recipe_helper.Commnuity.Adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +93,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 .expandAnimation(true)
                 .build();
         Glide.with(context).load(post_list.get(position).getWriterProfileUrl()).into(holder.post_pics);
+
         holder.post_user_id.setText(post_list.get(position).getWriterNickname());
         holder.post_title.setText(post_list.get(position).getTitle());
 
