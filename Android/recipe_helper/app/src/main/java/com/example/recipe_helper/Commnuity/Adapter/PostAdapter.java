@@ -43,6 +43,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         protected TextView post_user_id;
         protected TextView post_content;
         protected TextView extend_comment;
+        protected TextView heart_cnt;
+        protected TextView comment_cnt;
         protected ImageView post_pics;
         protected ImageView heart;
         protected ImageView balloon;
@@ -54,6 +56,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             this.post_user_id = (TextView) itemView.findViewById(R.id.post_user_id);
             this.post_title = (TextView) itemView.findViewById(R.id.post_title);
             this.post_content = (TextView) itemView.findViewById(R.id.post_content);
+            this.heart_cnt = (TextView) itemView.findViewById(R.id.heart_cnt);
+            this.comment_cnt = (TextView) itemView.findViewById(R.id.comment_cnt);
             this.post_pics = (ImageView) itemView.findViewById(R.id.post_pic);
             this.heart = (ImageView) itemView.findViewById(R.id.heart);
             this.balloon = (ImageView) itemView.findViewById(R.id.go_comment);
@@ -113,6 +117,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
 
         holder.postID = post_list.get(position).getPostID();
+
+        holder.comment_cnt.setText(String.valueOf(post_list.get(position).getComment()));
+        holder.heart_cnt.setText(String.valueOf(post_list.get(position).getHeart()));
     }
 
     @Override

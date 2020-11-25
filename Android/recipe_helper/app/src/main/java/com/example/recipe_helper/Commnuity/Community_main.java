@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recipe_helper.Commnuity.Adapter.PostAdapter;
 import com.example.recipe_helper.Commnuity.DataFrame.Post;
@@ -31,6 +32,7 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
     private static final String TAG = "Community_main";
     private ArrayList<Post> post_list = new ArrayList<>();
     private PostAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -50,6 +52,15 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
             @Override
             public void onClick(View v) {
                 ((MainActivity) getActivity()).replaceFragmentAddBackStack(new Create_post());
+            }
+        });
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.turquoise);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadPost();
             }
         });
 
@@ -75,6 +86,7 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
                     post_list.clear();
                     post_list.addAll(results);
                     adapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
                 }
