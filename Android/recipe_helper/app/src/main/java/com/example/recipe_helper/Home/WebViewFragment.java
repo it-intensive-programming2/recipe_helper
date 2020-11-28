@@ -1,22 +1,40 @@
 package com.example.recipe_helper.Home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.recipe_helper.DataFrame.UserInfo;
+import com.example.recipe_helper.HttpConnection.BaseResponse;
+import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
+import com.example.recipe_helper.HttpConnection.RetrofitService;
+import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
+
+import retrofit2.Call;
 
 public class WebViewFragment extends Fragment {
 
+    private static final String TAG = WebViewFragment.class.getName();
     private String recipeID;
+
+    private ImageView scrap_star;
+    private LinearLayout ll_1;
+    private LinearLayout ll_2;
+    private LinearLayout ll_3;
+    private UserInfo user;
+    private boolean isScrap = false;
 
     public WebViewFragment(String recipeID) {
         this.recipeID = recipeID;
@@ -27,6 +45,9 @@ public class WebViewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.webview, container, false);
         view.setClickable(true);
+        user = ((MainActivity) getActivity()).user;
+
+        HTTPisScrap(Integer.parseInt(recipeID));
 
         WebView mWebView = (WebView) view.findViewById(R.id.webview);
         mWebView.setWebViewClient(new WebViewClient()); // 클릭시 새창 안뜨게
@@ -44,6 +65,73 @@ public class WebViewFragment extends Fragment {
 
         mWebView.loadUrl("https://www.10000recipe.com/recipe/" + recipeID); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
+        ll_1 = view.findViewById(R.id.ll_1);
+        ll_2 = view.findViewById(R.id.ll_2);
+        ll_3 = view.findViewById(R.id.ll_3);
+        scrap_star = view.findViewById(R.id.scrap_star);
+
+        scrap_star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isScrap) {
+                    scrap_star.setBackgroundResource(R.drawable.ic_icon_before_scrap);
+                    isScrap = false;
+                } else {
+                    scrap_star.setBackgroundResource(R.drawable.ic_icon_after_scrap);
+                    isScrap = true;
+                }
+                setScrap(Integer.parseInt(recipeID));
+            }
+        });
+
         return view;
+    }
+
+
+    private void HTTPisScrap(int recipeID) {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<BaseResponse> call = service.isScrap(user.userID, recipeID);
+
+        call.enqueue(new retrofit2.Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    BaseResponse result = response.body();
+                    if (result.checkError(getActivity()) != 0) isScrap = false;
+                    else {
+                        scrap_star.setBackgroundResource(R.drawable.ic_icon_after_scrap);
+                        isScrap = true;
+                    }
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    private void setScrap(int recipeID) {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<BaseResponse> call = service.setScrap(user.userID, recipeID);
+
+        call.enqueue(new retrofit2.Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    BaseResponse result = response.body();
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 }

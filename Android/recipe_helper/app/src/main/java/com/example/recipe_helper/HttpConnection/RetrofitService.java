@@ -59,6 +59,18 @@ public interface RetrofitService {
     @GET("recipe/loadRecommendRecipe3")
     Call<RecipeResponse> loadRecommendRecipe3();
 
+    @GET("recipe/loadTasteRecipe")
+    Call<RecipeResponse> loadTasteRecipe();
+
+    @GET("recipe/loadScrap")
+    Call<RecipeResponse> loadScrap(@Query("userID") long userID);
+
+    @GET("recipe/setScrap")
+    Call<BaseResponse> setScrap(@Query("userID") long userID, @Query("recipeID") int recipeID);
+
+    @GET("recipe/isScrap")
+    Call<BaseResponse> isScrap(@Query("userID") long userID, @Query("recipeID") int recipeID);
+
     @GET("recipe/changeUserInfo")
     Call<UserInfoResponse> changeUserInfo(@Query("userID") long userID, @Query("allergy") String allergy, @Query("disease") String disease);
 }

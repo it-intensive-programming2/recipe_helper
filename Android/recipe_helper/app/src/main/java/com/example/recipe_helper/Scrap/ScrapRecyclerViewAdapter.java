@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.R;
-import com.example.recipe_helper.RecipeRecyclerAdapter;
 
 import java.util.ArrayList;
 
@@ -32,7 +30,7 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
     public interface OnListItemSelectedInterface {
         void onItemSelected2(View v, int recipeID);
 
-        void onItemSelected(View v, int position);
+        void onItemSelected(View v, int position, int recipeID);
     }
 
     @NonNull
@@ -60,6 +58,8 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
         protected ImageView recipeImage;
         protected ImageView scrapStar;
 
+        protected boolean isChecked;
+
 
         public Holder(View view) {
             super(view);
@@ -84,7 +84,7 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
             scrapStar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, getAdapterPosition());
+                    mListener.onItemSelected(v, getAdapterPosition(), list.get(getAdapterPosition()).recipeID);
                 }
             });
 
@@ -99,11 +99,13 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
         holder.cat2.setText(list.get(position).cat2);
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
+        holder.isChecked = true;
+        holder.scrapStar.setBackgroundResource(R.drawable.ic_icon_after_scrap);
 
         String ingredient = list.get(position).ingredientList;
-        ingredient = ingredient.replace("]", "");
-        ingredient = ingredient.replace("[", "");
-        ingredient = ingredient.replace("'", "");
+//        ingredient = ingredient.replace("]", "");
+//        ingredient = ingredient.replace("[", "");
+//        ingredient = ingredient.replace("'", "");
         holder.ingredient.setText(ingredient);
 
         Glide.with(context).load(list.get(position).photo).into(holder.recipeImage);
