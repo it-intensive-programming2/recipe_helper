@@ -70,15 +70,16 @@
 
                 <ImageView
                     android:id="@+id/ic_fire"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_fire" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_hot" />
 
                 <TextView
                     android:id="@+id/title_hot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/ic_fire"
                     android:text="HOT! 레시피"
                     android:textSize="20sp"
@@ -114,15 +115,16 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_fire" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_like_heart" />
 
                 <TextView
                     android:id="@+id/title1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recommend1"
+                    android:layout_marginLeft="10dp"
+                    android:text="'아주'님이 좋아할 만한 레시피"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -173,15 +175,16 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_fire" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_team_man" />
 
                 <TextView
                     android:id="@+id/title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recommend2"
+                    android:layout_marginLeft="10dp"
+                    android:text="20대 남자가 좋아할 만한 레시피"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </LinearLayout>
