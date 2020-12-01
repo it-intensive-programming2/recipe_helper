@@ -296,7 +296,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="25dp"
+            android:layout_margin="15dp"
             android:src="@drawable/ic_baseline_chevron_right_24" />
     </RelativeLayout>
 </layout>

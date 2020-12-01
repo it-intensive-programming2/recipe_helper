@@ -24,7 +24,6 @@ import com.example.recipe_helper.Home.Dataframe.DoubleHomeRecipeFrame;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
-import com.example.recipe_helper.Mypage.MyPage;
 import com.example.recipe_helper.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,7 +33,7 @@ import retrofit2.Call;
 
 public class Home extends Fragment implements ViewPageAdapter.OnListItemSelectedInterface, HomeRecyclerViewAdapter.OnListItemSelectedInterface {
 
-    private static final String TAG = Home.class.getName();
+    private static final String TAG = "RHC";
     private ViewPageAdapter pageAdapter;
     private HomeRecyclerViewAdapter adapter1;
     private HomeRecyclerViewAdapter adapter2;

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.example.recipe_helper.DataFrame.UserInfo;
 import com.example.recipe_helper.Home.WebViewFragment;
+import com.example.recipe_helper.HttpConnection.BaseResponse;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
@@ -29,6 +32,9 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
     private static final String TAG = Scrap.class.getName();
     private ArrayList<RecipeData> likes = new ArrayList<>();
     private ScrapRecyclerViewAdapter adapter;
+    private TextView none_text;
+    private RecyclerView recyclerView;
+    private UserInfo user;
 
     @Nullable
     @Override
@@ -36,16 +42,19 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
         View view = inflater.inflate(R.layout.scrap_, container, false);
         view.setClickable(true);
 
+        user = ((MainActivity) getActivity()).user;
+
+        none_text = view.findViewById(R.id.none_text);
         loadMyScrap();
 
         adapter = new ScrapRecyclerViewAdapter(getContext(), likes, this);
 
-        RecyclerView recyclerView1 = (RecyclerView) view.findViewById(R.id.rv);
-        recyclerView1.setHasFixedSize(true);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv);
+        recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity());
-        recyclerView1.setLayoutManager(layoutManager1);
-        recyclerView1.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager1);
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
@@ -56,14 +65,42 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
     }
 
     @Override
-    public void onItemSelected(View v, int position) {
-        likes.remove(position);
-        adapter.notifyDataSetChanged();
+    public void onItemSelected(View v, int position, int recipeID) {
+        ScrapRecyclerViewAdapter.Holder holder = (ScrapRecyclerViewAdapter.Holder) recyclerView.findViewHolderForAdapterPosition(position);
+        if (holder.isChecked) {
+            holder.scrapStar.setBackgroundResource(R.drawable.ic_icon_before_scrap);
+            holder.isChecked = false;
+        } else {
+            holder.scrapStar.setBackgroundResource(R.drawable.ic_icon_after_scrap);
+            holder.isChecked = true;
+        }
+        setScrap(recipeID);
+    }
+
+    private void setScrap(int recipeID) {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<BaseResponse> call = service.setScrap(user.userID, recipeID);
+
+        call.enqueue(new retrofit2.Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    BaseResponse result = response.body();
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
     private void loadMyScrap() {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<RecipeResponse> call = service.loadRecommendRecipe3();
+        Call<RecipeResponse> call = service.loadScrap(user.userID);
 
         call.enqueue(new retrofit2.Callback<RecipeResponse>() {
             @Override
@@ -73,6 +110,9 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
                     likes.clear();
                     likes.addAll(result.body);
                     adapter.notifyDataSetChanged();
+                    if (likes.isEmpty()) {
+                        none_text.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
                 }
