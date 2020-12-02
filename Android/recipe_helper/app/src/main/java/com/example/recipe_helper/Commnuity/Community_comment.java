@@ -96,7 +96,7 @@ public class Community_comment extends Fragment {
 
         writer_img.setBackground(new ShapeDrawable(new OvalShape()));
         writer_img.setClipToOutline(true);
-        Glide.with(getContext()).load(pic).into(writer_img);
+        Glide.with(getContext()).load(pic).circleCrop().into(writer_img);
 
         user_img.setBackground(new ShapeDrawable(new OvalShape()));
         user_img.setClipToOutline(true);

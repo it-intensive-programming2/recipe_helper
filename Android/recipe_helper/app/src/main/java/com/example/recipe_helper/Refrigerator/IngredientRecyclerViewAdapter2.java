@@ -41,7 +41,6 @@ public class IngredientRecyclerViewAdapter2 extends RecyclerView.Adapter<Ingredi
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-//        holder.ingredient_image.setImageBitmap(arrayList.get(position).ig_profile);
         holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(ic_apple));
         holder.ingredient_name.setText(arrayList.get(position).name);
     }
