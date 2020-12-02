@@ -81,7 +81,12 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     public void onBindViewHolder(@NonNull RecipeRecyclerAdapter.Holder holder, final int position) {
         holder.title.setText(list.get(position).title);
         holder.author.setText("by " + list.get(position).author);
-        holder.cat1.setText(list.get(position).className.split("_")[1]);
+        String category = list.get(position).className;
+        if (category.equals("카레")) {
+            holder.cat1.setText(category);
+        } else {
+            holder.cat1.setText(category.split("_")[1]);
+        }
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
         holder.ingredient.setText(list.get(position).ingredientList);

@@ -1,6 +1,7 @@
 package com.example.recipe_helper.Refrigerator;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ public class IngredientRecyclerViewAdapter2 extends RecyclerView.Adapter<Ingredi
 
     private ArrayList<IngredientData> arrayList = new ArrayList<IngredientData>();
     private Context context;
-    private Realm realm;
 
     public IngredientRecyclerViewAdapter2(Context context, ArrayList<IngredientData> arrayList) {
         this.arrayList = arrayList;
@@ -34,14 +34,23 @@ public class IngredientRecyclerViewAdapter2 extends RecyclerView.Adapter<Ingredi
     @Override
     public IngredientRecyclerViewAdapter2.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.refrigerator_recycler_ingredient_item2, parent, false);
-        realm = Realm.getDefaultInstance();
         Holder holder = new Holder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(ic_apple));
+        String mDrawableName;
+
+        if (arrayList.get(position).image.equals("-")) {
+            mDrawableName = "ic_" + "diet";
+        } else {
+            mDrawableName = "ic_" + arrayList.get(position).image;
+        }
+
+        int resId = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
+
+        holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(resId));
         holder.ingredient_name.setText(arrayList.get(position).name);
     }
 
@@ -59,6 +68,5 @@ public class IngredientRecyclerViewAdapter2 extends RecyclerView.Adapter<Ingredi
             this.ingredient_image = (ImageView) itemView.findViewById(R.id.ingredient_image);
             this.ingredient_name = (TextView) itemView.findViewById(R.id.ingredient_name);
         }
-
     }
 }

@@ -114,14 +114,14 @@ public class Refrigerator_search extends Fragment implements SearchAdapter.OnLis
         });
     }
 
-    public void addIngredient(final String name) {
+    public void addIngredient(final String name, final String image) {
         realm.executeTransactionAsync(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 IngredientData ingredientData = realm.createObject(IngredientData.class);
 
                 ingredientData.name = name;
-                ingredientData.image = "이미지";
+                ingredientData.image = image;
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override
@@ -139,7 +139,7 @@ public class Refrigerator_search extends Fragment implements SearchAdapter.OnLis
     }
 
     @Override
-    public void onItemSelected(View v, String ingredient_name) {
-        addIngredient(ingredient_name);
+    public void onItemSelected(View v, String ingredient_name, String image) {
+        addIngredient(ingredient_name, image);
     }
 }

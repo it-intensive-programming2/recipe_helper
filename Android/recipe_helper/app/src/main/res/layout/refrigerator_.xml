@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="80dp"
                 android:text="냉장고 속 식재료를 추가하세요!"
                 android:visibility="invisible"
                 app:layout_constraintLeft_toLeftOf="parent"

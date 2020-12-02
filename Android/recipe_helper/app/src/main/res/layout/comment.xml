@@ -86,6 +86,14 @@
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#50727C8E"
+                app:layout_constraintTop_toBottomOf="@id/ll" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/comment_recycler_view"
                 android:layout_width="match_parent"
@@ -96,8 +104,7 @@
                 android:scrollbarSize="5dp"
                 android:scrollbarThumbVertical="@android:color/darker_gray"
                 android:scrollbars="vertical"
-                app:layout_anchor="@+id/linearLayout"
-                app:layout_constraintTop_toBottomOf="@id/ll" />
+                app:layout_constraintTop_toBottomOf="@id/line" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -136,6 +136,7 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
                     btn_search.setVisibility(View.INVISIBLE);
                     shimmerFrameLayout.setVisibility(View.VISIBLE);
                     shimmerFrameLayout.startShimmer();
+                    result_text.setText("검색중...");
                     String ingredientString = "";
                     for (IngredientData ingredientData : ingredientList) {
                         ingredientString = ingredientString + " " + ingredientData.name;
@@ -194,7 +195,9 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
                         btn_search.setText("검색되는 식재료가 없어요 ㅠ-ㅠ");
                     } else {
                         result_text.setText(String.format("검색결과 %d개", list.size()));
-                        delete_text.setText(String.format("%s (이)가 빠질 수 있어요", result.delete_list));
+                        if (result.delete_list.length() > 2) {
+                            delete_text.setText(String.format("%s (이)가 빠질 수 있어요", result.delete_list));
+                        }
                         btn_search.setVisibility(View.GONE);
                     }
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

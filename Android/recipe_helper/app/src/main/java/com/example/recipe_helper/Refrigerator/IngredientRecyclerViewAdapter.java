@@ -2,6 +2,7 @@ package com.example.recipe_helper.Refrigerator;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +45,18 @@ public class IngredientRecyclerViewAdapter extends RecyclerView.Adapter<Ingredie
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-//        holder.ingredient_image.setImageBitmap(arrayList.get(position).ig_profile);
-        holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(ic_apple));
+
+        String mDrawableName;
+
+        if (arrayList.get(position).image.equals("-")) {
+            mDrawableName = "ic_" + "diet";
+        } else {
+            mDrawableName = "ic_" + arrayList.get(position).image;
+        }
+
+        int resId = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
+
+        holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(resId));
         holder.ingredient_name.setText(arrayList.get(position).name);
     }
 

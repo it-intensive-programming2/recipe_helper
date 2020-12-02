@@ -1,6 +1,7 @@
 package com.example.recipe_helper.Refrigerator;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.recipe_helper.DataFrame.IngredientData;
 import com.example.recipe_helper.R;
 
@@ -27,7 +29,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Holder> {
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, String ingredient_name);
+        void onItemSelected(View v, String ingredient_name, String image);
     }
 
     @NonNull
@@ -56,7 +58,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Holder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onItemSelected(view, ingredient_name.getText().toString());
+                    mListener.onItemSelected(view, ingredient_name.getText().toString(), list.get(getAdapterPosition()).image);
                 }
             });
         }
@@ -65,8 +67,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, final int position) {
         holder.ingredient_name.setText(list.get(position).name);
+        String mDrawableName;
 
-//        Glide.with(context).load(list.get(position).image).into(holder.ingredient_image);
+        if (list.get(position).image.equals("-")) {
+            mDrawableName = "ic_" + "diet";
+        } else {
+            mDrawableName = "ic_" + list.get(position).image;
+        }
+        int resId = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
+        Log.d("RHC", "onBindViewHolder: " + resId + mDrawableName);
+        holder.ingredient_image.setImageDrawable(context.getResources().getDrawable(resId));
 
         holder.itemView.setTag(position);
     }
