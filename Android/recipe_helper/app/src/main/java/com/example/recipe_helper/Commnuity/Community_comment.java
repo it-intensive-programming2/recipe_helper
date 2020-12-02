@@ -100,7 +100,7 @@ public class Community_comment extends Fragment {
 
         user_img.setBackground(new ShapeDrawable(new OvalShape()));
         user_img.setClipToOutline(true);
-        Glide.with(getContext()).load(user.profileUrl).into(user_img);
+        Glide.with(getContext()).load(user.profileUrl).circleCrop().into(user_img);
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
