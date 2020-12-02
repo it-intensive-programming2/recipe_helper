@@ -7,6 +7,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -40,7 +42,7 @@ import java.security.MessageDigest;
 
 import retrofit2.Call;
 
-public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getName();
     public UserInfo user;
@@ -51,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private Refrigerator refrigerator;
     private Scrap scrap;
     private Community_main community_main;
-    private Community_comment community_comment;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
     private View nav_view;
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -82,33 +82,25 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
 
     @Override
-
-
     protected void onCreate(Bundle savedInstanceState) {
-
-
         setContentView(R.layout.activity_main);
-//        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.);
-//        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//
-//                //새로고침 작업 실행...
-//
-//                mSwipeRefreshLayout.setRefreshing(false);
-//
-//            }
-//        });
-
-
         super.onCreate(savedInstanceState);
 
+        View view = getWindow().getDecorView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (view != null) {
+                view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                getWindow().setStatusBarColor(Color.parseColor("#FBFBFB"));
+            }
+        } else if (Build.VERSION.SDK_INT >= 21) {
+            // 21 버전 이상일 때
+            getWindow().setStatusBarColor(Color.BLACK);
+        }
 
         Intent intent = getIntent();
         user = (UserInfo) intent.getSerializableExtra("OBJECT");
 
         Log.d(TAG, "userinfo" + user.userID);
-
 
         checkUser();
 
@@ -117,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         my_page = new MyPage();
         refrigerator = new Refrigerator();
         community_main = new Community_main();
-        community_comment = new Community_comment();
 
         nav_view = findViewById(R.id.nav_view);
 
@@ -125,20 +116,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(R.id.item_home);
 
-
         getAppKeyHash();
     }
-
-    public void onRefresh() {
-        Toast.makeText(this, "Refresh", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 2000);
-    }
-
 
     public void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

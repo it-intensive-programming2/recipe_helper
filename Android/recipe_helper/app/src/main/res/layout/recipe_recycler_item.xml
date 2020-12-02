@@ -23,8 +23,8 @@
                 android:id="@+id/recipe_image"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
+                android:background="#DDDDDD"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_logo_only"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,11 +43,12 @@
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#DDDDDD"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="title"
+                    android:text="                                          "
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -55,12 +56,13 @@
 
                 <TextView
                     android:id="@+id/ingredient"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="#DDDDDD"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="ingredient"
+                    android:text="                                      "
                     android:textColor="@color/dark_gray"
                     android:textSize="14sp" />
 
@@ -70,7 +72,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="by author"
+                    android:background="#DDDDDD"
+                    android:text="                   "
                     android:textColor="@color/faded_gray" />
 
                 <LinearLayout
@@ -85,7 +88,8 @@
                         android:id="@+id/cat1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="cat1"
+                        android:background="#DDDDDD"
+                        android:text="          "
                         android:textColor="@color/faded_gray" />
 
                     <TextView
@@ -93,7 +97,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="time"
+                        android:background="#DDDDDD"
+                        android:text="           "
                         android:textColor="@color/faded_gray" />
 
                     <TextView
@@ -101,7 +106,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:text="level"
+                        android:background="#DDDDDD"
+                        android:text="            "
                         android:textColor="@color/faded_gray" />
                 </LinearLayout>
             </LinearLayout>

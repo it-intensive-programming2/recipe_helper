@@ -83,6 +83,7 @@ public class Refrigerator_ingredient extends Fragment {
         final RealmResults<IngredientData> results = realm.where(IngredientData.class).findAll();
         list.clear();
         list.addAll(realm.copyFromRealm(results));
+        Log.d("RHC", "list size: " + list.size());
         adapter.notifyDataSetChanged();
     }
 
@@ -113,6 +114,7 @@ public class Refrigerator_ingredient extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("RHC", "onResume: TT");
         loadIngredient();
     }
 }

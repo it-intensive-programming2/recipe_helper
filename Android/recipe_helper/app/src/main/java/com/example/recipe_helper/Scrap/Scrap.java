@@ -74,12 +74,12 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
             holder.scrapStar.setBackgroundResource(R.drawable.ic_icon_after_scrap);
             holder.isChecked = true;
         }
-        setScrap(recipeID);
+        setScrap(recipeID, classNum);
     }
 
-    private void setScrap(int recipeID) {
+    private void setScrap(int recipeID, int recipeClass) {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<BaseResponse> call = service.setScrap(user.userID, recipeID);
+        Call<BaseResponse> call = service.setScrap(user.userID, recipeID, recipeClass);
 
         call.enqueue(new retrofit2.Callback<BaseResponse>() {
             @Override

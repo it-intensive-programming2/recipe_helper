@@ -33,44 +33,137 @@
         android:scrollbarThumbVertical="@android:color/darker_gray"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_ingredient"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:overScrollMode="never"
-                android:scrollbarFadeDuration="0"
-                android:scrollbarSize="5dp"
-                android:scrollbarThumbVertical="@android:color/darker_gray"
-                android:scrollbars="vertical"
-                tools:ignore="MissingConstraints" />
+            android:layout_height="match_parent">
 
 
             <TextView
+                android:id="@+id/none_ingredient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Helper의 Solution"
-                android:textSize="20sp" />
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="110dp"
+                android:text="냉장고 속 식재료를 추가하세요!"
+                android:visibility="invisible"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <LinearLayout
+                android:id="@+id/ll_1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:overScrollMode="never"
-                android:scrollbarFadeDuration="0"
-                android:scrollbarSize="5dp"
-                android:scrollbarThumbVertical="@android:color/darker_gray"
-                android:scrollbars="vertical"
-                tools:ignore="MissingConstraints" />
-        </LinearLayout>
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="남아있는 식재료"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_ingredient"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:minHeight="100dp"
+                    android:overScrollMode="never"
+                    android:scrollbarFadeDuration="0"
+                    android:scrollbarSize="5dp"
+                    android:scrollbarThumbVertical="@android:color/darker_gray"
+                    android:scrollbars="vertical"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120dp"
+                android:background="@color/turquoise"
+                android:elevation="10dp"
+                android:text="솔루션 찾기"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_baseline_search_24"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ll_2" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerFrameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="@id/ll_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/recipe_recycler_item" />
+
+                    <include layout="@layout/recipe_recycler_item" />
+
+                    <include layout="@layout/recipe_recycler_item" />
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/ll_1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Helper의 Solution"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/result_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/delete_string"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:overScrollMode="never"
+                    android:scrollbarFadeDuration="0"
+                    android:scrollbarSize="5dp"
+                    android:scrollbarThumbVertical="@android:color/darker_gray"
+                    android:scrollbars="vertical"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.core.widget.NestedScrollView>
 

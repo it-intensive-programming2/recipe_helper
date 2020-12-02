@@ -81,11 +81,18 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     public void onBindViewHolder(@NonNull RecipeRecyclerAdapter.Holder holder, final int position) {
         holder.title.setText(list.get(position).title);
         holder.author.setText("by " + list.get(position).author);
-        holder.cat1.setText(list.get(position).className);
+        holder.cat1.setText(list.get(position).className.split("_")[1]);
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
         holder.ingredient.setText(list.get(position).ingredientList);
         holder.classNum = list.get(position).classNum;
+
+        holder.title.setBackground(null);
+        holder.author.setBackground(null);
+        holder.cat1.setBackground(null);
+        holder.time.setBackground(null);
+        holder.level.setBackground(null);
+        holder.ingredient.setBackground(null);
 
         Glide.with(context).load(list.get(position).photo).into(holder.recipeImage);
 

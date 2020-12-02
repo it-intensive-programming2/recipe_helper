@@ -126,6 +126,8 @@ public class Refrigerator_search extends Fragment implements SearchAdapter.OnLis
         }, new Realm.Transaction.OnSuccess() {
             @Override
             public void onSuccess() {
+                imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
+                getActivity().getSupportFragmentManager().popBackStack();
                 Log.d(TAG, "onSuccess: Realm");
             }
         }, new Realm.Transaction.OnError() {
@@ -139,8 +141,5 @@ public class Refrigerator_search extends Fragment implements SearchAdapter.OnLis
     @Override
     public void onItemSelected(View v, String ingredient_name) {
         addIngredient(ingredient_name);
-        imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
-
-        getActivity().getSupportFragmentManager().popBackStack();
     }
 }

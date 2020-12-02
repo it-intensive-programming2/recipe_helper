@@ -4,6 +4,7 @@ import com.example.recipe_helper.Commnuity.DataFrame.Comments2Response;
 import com.example.recipe_helper.Commnuity.DataFrame.PostResponse;
 import com.example.recipe_helper.DataFrame.IngredientResponse;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.example.recipe_helper.DataFrame.RecipeResponse2;
 import com.example.recipe_helper.DataFrame.UserInfoResponse;
 import com.google.gson.JsonObject;
 
@@ -54,10 +55,10 @@ public interface RetrofitService {
     Call<RecipeResponse> loadRecommendRecipe1(@Query("userID") long userID);
 
     @GET("recipe/loadRecommendRecipe2")
-    Call<RecipeResponse> loadRecommendRecipe2(@Query("userID") long userID);
+    Call<RecipeResponse> loadRecommendRecipe2(@Query("userAgeRange") int userAgeRange);
 
     @GET("recipe/loadRecommendRecipe3")
-    Call<RecipeResponse> loadRecommendRecipe3(@Query("userID") long userID);
+    Call<RecipeResponse2> loadRecommendRecipe3(@Query("ingredientString") String ingredientString);
 
     @GET("recipe/loadTasteRecipe")
     Call<RecipeResponse> loadTasteRecipe();
@@ -66,7 +67,7 @@ public interface RetrofitService {
     Call<RecipeResponse> loadScrap(@Query("userID") long userID);
 
     @GET("recipe/setScrap")
-    Call<BaseResponse> setScrap(@Query("userID") long userID, @Query("recipeID") int recipeID);
+    Call<BaseResponse> setScrap(@Query("userID") long userID, @Query("recipeID") int recipeID, @Query("recipeClass") int recipeClass);
 
     @GET("recipe/isScrap")
     Call<BaseResponse> isScrap(@Query("userID") long userID, @Query("recipeID") int recipeID);

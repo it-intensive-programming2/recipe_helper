@@ -52,7 +52,6 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
         protected TextView ingredient;
         protected TextView author;
         protected TextView cat1;
-        protected TextView cat2;
         protected TextView time;
         protected TextView level;
         protected ImageView recipeImage;
@@ -67,7 +66,6 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
             this.ingredient = (TextView) view.findViewById(R.id.ingredient);
             this.author = (TextView) view.findViewById(R.id.author);
             this.cat1 = (TextView) view.findViewById(R.id.cat1);
-            this.cat2 = (TextView) view.findViewById(R.id.cat2);
             this.time = (TextView) view.findViewById(R.id.time);
             this.level = (TextView) view.findViewById(R.id.level);
             this.scrapStar = (ImageView) view.findViewById(R.id.scrap_star);
@@ -95,7 +93,7 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
     public void onBindViewHolder(@NonNull Holder holder, final int position) {
         holder.title.setText(list.get(position).title);
         holder.author.setText("by " + list.get(position).author);
-        holder.cat1.setText(list.get(position).className);
+        holder.cat1.setText(list.get(position).className.split("_")[1]);
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
         holder.isChecked = true;

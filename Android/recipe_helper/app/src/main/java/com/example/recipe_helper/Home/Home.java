@@ -75,16 +75,18 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         ttitle1.setText(String.format("'%s'님이 좋아하실 만한 레시피", user.nickName));
         title1.setText(String.format("'%s'님이 좋아하실 만한 레시피", user.nickName));
 
-        String age = user.ageRange;
+        String age;
         String gender;
         if (user.gender.equals("male")) gender = "남자";
         else gender = "여자";
+        if (user.ageRange.length() > 3) {
+            age = user.ageRange.substring(0, 2);
+        } else {
+            age = user.ageRange;
+        }
 
         ttitle2.setText(String.format("%s대 %s가 좋아할 만한 레시피", age, gender));
         title2.setText(String.format("%s대 %s가 좋아할 만한 레시피", age, gender));
-
-        Log.d("RHC", "onCreateView: " + title1.getText().toString());
-        Log.d("RHC", "onCreateView: " + title2.getText().toString());
 
         relativeLayout = view.findViewById(R.id.relative_layout);
         relativeLayout.setVisibility(View.INVISIBLE);
@@ -242,7 +244,8 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
 
     private void loadRecommendRecipe2() {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<RecipeResponse> call = service.loadRecommendRecipe2(user.userID);
+
+        Call<RecipeResponse> call = service.loadRecommendRecipe2(Integer.parseInt(user.ageRange.substring(0, 2)));
 
         call.enqueue(new retrofit2.Callback<RecipeResponse>() {
             @Override

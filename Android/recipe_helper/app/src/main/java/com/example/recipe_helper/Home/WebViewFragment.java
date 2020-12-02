@@ -146,7 +146,7 @@ public class WebViewFragment extends Fragment {
 
     private void setScrap(int recipeID) {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<BaseResponse> call = service.setScrap(user.userID, recipeID);
+        Call<BaseResponse> call = service.setScrap(user.userID, recipeID, recipeClass);
 
         call.enqueue(new retrofit2.Callback<BaseResponse>() {
             @Override
