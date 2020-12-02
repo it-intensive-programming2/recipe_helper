@@ -26,8 +26,11 @@ public class Recommend extends Fragment implements RecipeRecyclerAdapter.OnListI
     private RecipeRecyclerAdapter adapter;
     private ArrayList<RecipeData> list = new ArrayList<>();
 
-    public Recommend(ArrayList<RecipeData> list) {
+    private String title;
+
+    public Recommend(ArrayList<RecipeData> list, String title) {
         this.list = list;
+        this.title = title;
     }
 
     @Nullable
@@ -36,11 +39,9 @@ public class Recommend extends Fragment implements RecipeRecyclerAdapter.OnListI
         View view = inflater.inflate(R.layout.home_recommend, container, false);
         view.setClickable(true);
 
-//        Toolbar toolbar = view.findViewById(R.id.toolbar);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-//        ActionBar actionbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-//        actionbar.setDisplayShowCustomEnabled(true);
-//        actionbar.setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        toolbar.setTitle(title);
 
         adapter = new RecipeRecyclerAdapter(getContext(), list, this);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);

@@ -114,13 +114,12 @@ public class MyPage extends Fragment {
         favor_user_name.setText(user.nickName + "님의 취향분석");
         useremail.setText(user.email);
         userage.setText(user.ageRange + "대");
-        usergender.setText(user.gender);
-
+        if (user.gender.equals("male")) usergender.setText("남성");
+        else usergender.setText("여성");
 
         iv.setImageResource(ImageId[disease_1]);
         iv2.setImageResource(ImageId[disease_2]);
         iv3.setImageResource(ImageId[disease_3]);
-
 
         iv.setOnClickListener(new View.OnClickListener() {
             @Override

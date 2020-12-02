@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,11 +35,15 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
     private PostAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+    private TextView none_feed;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.feed_commnunity, container, false);
         view.setClickable(true);
+
+        none_feed = view.findViewById(R.id.none_feed);
 
         adapter = new PostAdapter(getContext(), post_list, this, this);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.community_recycler);
@@ -87,6 +92,9 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
                     post_list.addAll(results);
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
+                    if (post_list.isEmpty()) {
+                        none_feed.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
                 }

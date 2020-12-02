@@ -17,8 +17,8 @@
             android:id="@+id/image1"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:background="#DDDDDD"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/title1"
@@ -39,8 +39,8 @@
             android:id="@+id/image2"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            app:srcCompat="@mipmap/ic_launcher_round" />
+            android:background="#DDDDDD"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/title2"

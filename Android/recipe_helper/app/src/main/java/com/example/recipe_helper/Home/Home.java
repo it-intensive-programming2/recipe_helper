@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +28,7 @@ import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.kakao.usermgmt.response.model.User;
 
@@ -50,14 +53,44 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
 
     private int list1_index = 2;
     private int list2_index = 2;
+    private TextView title1;
+    private TextView title2;
+    private TextView ttitle1;
+    private TextView ttitle2;
+
+    private ShimmerFrameLayout shimmerFrameLayout;
+    private RelativeLayout relativeLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
         view.setClickable(true);
-
         user = ((MainActivity) getActivity()).user;
+
+        ttitle1 = view.findViewById(R.id.ttitle1);
+        ttitle2 = view.findViewById(R.id.ttitle2);
+        title1 = view.findViewById(R.id.home_title1);
+        title2 = view.findViewById(R.id.home_title2);
+        ttitle1.setText(String.format("'%s'님이 좋아하실 만한 레시피", user.nickName));
+        title1.setText(String.format("'%s'님이 좋아하실 만한 레시피", user.nickName));
+
+        String age = user.ageRange;
+        String gender;
+        if (user.gender.equals("male")) gender = "남자";
+        else gender = "여자";
+
+        ttitle2.setText(String.format("%s대 %s가 좋아할 만한 레시피", age, gender));
+        title2.setText(String.format("%s대 %s가 좋아할 만한 레시피", age, gender));
+
+        Log.d("RHC", "onCreateView: " + title1.getText().toString());
+        Log.d("RHC", "onCreateView: " + title2.getText().toString());
+
+        relativeLayout = view.findViewById(R.id.relative_layout);
+        relativeLayout.setVisibility(View.INVISIBLE);
+        shimmerFrameLayout = view.findViewById(R.id.shimmerFrameLayout);
+
+        shimmerFrameLayout.startShimmer();
 
         dList1.clear();
         dList2.clear();
@@ -102,7 +135,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         more_info1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragmentFull(new Recommend(list1));
+                ((MainActivity) getActivity()).replaceFragmentFull(new Recommend(list1, title1.getText().toString()));
             }
         });
 
@@ -135,7 +168,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
         more_info2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).replaceFragmentFull(new Recommend(list2));
+                ((MainActivity) getActivity()).replaceFragmentFull(new Recommend(list2, title2.getText().toString()));
             }
         });
 
@@ -192,6 +225,9 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
                     list1.addAll(result.body);
                     dList1.add(new DoubleHomeRecipeFrame(list1.get(0), list1.get(1)));
                     adapter1.notifyDataSetChanged();
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    relativeLayout.setVisibility(View.VISIBLE);
                 } else {
                     Log.d(TAG, "onResponse: Fail " + response.toString());
                 }

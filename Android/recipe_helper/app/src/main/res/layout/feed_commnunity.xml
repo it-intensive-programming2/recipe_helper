@@ -29,6 +29,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar_layout">
 
+        <TextView
+            android:id="@+id/none_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시물이 없어요...\n아래 펜을 눌러 게시글을 작성해보세요:)"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_layout"
             android:layout_width="match_parent"
