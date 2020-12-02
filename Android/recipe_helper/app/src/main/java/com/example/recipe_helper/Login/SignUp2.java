@@ -56,7 +56,7 @@ public class SignUp2 extends Fragment implements TasteAdapter.OnListItemSelected
     private RecyclerView recyclerView;
     private ArrayList<RecipeData> list = new ArrayList<>();
     private ArrayList<String> selectList = new ArrayList<>();
-    private ArrayList<Integer> selectClassList = new ArrayList<>();
+    private ArrayList<String> selectClassList = new ArrayList<>();
 
 
     public SignUp2(UserInfo user, String allergyInfo, String diseaseInfo) {
@@ -201,13 +201,13 @@ public class SignUp2 extends Fragment implements TasteAdapter.OnListItemSelected
             cnt--;
             holder.image.setForeground(getResources().getDrawable(R.drawable.transparent));
             selectList.remove(String.valueOf(recipeID));
-            selectClassList.remove(classNum);
+            selectClassList.remove(String.valueOf(classNum));
             holder.isChecked = false;
         } else {
             cnt++;
             holder.image.setForeground(getResources().getDrawable(ic_image_check));
             selectList.add(String.valueOf(recipeID));
-            selectClassList.add(classNum);
+            selectClassList.add(String.valueOf(classNum));
             holder.isChecked = true;
         }
         progressBar.setProgress(cnt);
