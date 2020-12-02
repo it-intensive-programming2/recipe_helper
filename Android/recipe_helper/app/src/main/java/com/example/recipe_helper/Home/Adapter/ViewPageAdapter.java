@@ -22,7 +22,7 @@ public class ViewPageAdapter extends PagerAdapter {
     private OnListItemSelectedInterface mListener;
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int recipeID);
+        void onItemSelected(View v, int recipeID, int recipeClass);
     }
 
     public ViewPageAdapter(Context context, ArrayList<RecipeData> list, OnListItemSelectedInterface mListener) {
@@ -37,17 +37,22 @@ public class ViewPageAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.home_view_page, null);
 
         final int recipeID;
+        final int recipeClass;
+
         TextView recipe_name = view.findViewById(R.id.recipe_name);
         ImageView imageView = view.findViewById(R.id.imageView);
 
         recipeID = list.get(position).recipeID;
+        recipeClass = list.get(position).classNum;
+        
         Glide.with(mContext).load(list.get(position).photo).into(imageView);
         recipe_name.setText(list.get(position).title);
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onItemSelected(v, recipeID);
+                mListener.onItemSelected(v, recipeID, recipeClass);
             }
         });
 

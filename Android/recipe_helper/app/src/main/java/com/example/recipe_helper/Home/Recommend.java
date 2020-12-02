@@ -53,7 +53,7 @@ public class Recommend extends Fragment implements RecipeRecyclerAdapter.OnListI
         return view;
     }
 
-    public void onItemSelected(View v, int recipeID) {
-        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID)));
+    public void onItemSelected(View v, int recipeID, int classNum) {
+        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID), classNum));
     }
 }

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.example.recipe_helper.DataFrame.IngredientData;
 import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.example.recipe_helper.DataFrame.UserInfo;
 import com.example.recipe_helper.Home.Adapter.ViewPageAdapter;
 import com.example.recipe_helper.Home.Dataframe.DoubleHomeRecipeFrame;
 import com.example.recipe_helper.Home.WebViewFragment;
@@ -53,11 +54,15 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
     private Toolbar toolbar;
     private String TAG = "RHC";
 
+    private UserInfo user;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.refrigerator_, container, false);
         view.setClickable(true);
+
+        user = ((MainActivity) getActivity()).user;
 
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -106,8 +111,8 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
     }
 
     @Override
-    public void onItemSelected(View v, int recipeID) {
-        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID)));
+    public void onItemSelected(View v, int recipeID, int classNum) {
+        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID), classNum));
     }
 
     void loadIngredient() {
@@ -119,7 +124,7 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
 
     private void loadUserRecommendRecipe() {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<RecipeResponse> call = service.loadRecommendRecipe2();
+        Call<RecipeResponse> call = service.loadRecommendRecipe2(user.userID);
 
         call.enqueue(new retrofit2.Callback<RecipeResponse>() {
             @Override

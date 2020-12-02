@@ -28,7 +28,7 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int recipeID);
+        void onItemSelected(View v, int recipeID, int classNum);
     }
 
     @NonNull
@@ -50,10 +50,10 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
         protected TextView ingredient;
         protected TextView author;
         protected TextView cat1;
-        protected TextView cat2;
         protected TextView time;
         protected TextView level;
         protected ImageView recipeImage;
+        protected int classNum;
 
 
         public Holder(View view) {
@@ -62,7 +62,6 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
             this.ingredient = (TextView) view.findViewById(R.id.ingredient);
             this.author = (TextView) view.findViewById(R.id.author);
             this.cat1 = (TextView) view.findViewById(R.id.cat1);
-            this.cat2 = (TextView) view.findViewById(R.id.cat2);
             this.time = (TextView) view.findViewById(R.id.time);
             this.level = (TextView) view.findViewById(R.id.level);
 
@@ -71,7 +70,7 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, list.get(getAdapterPosition()).recipeID);
+                    mListener.onItemSelected(v, list.get(getAdapterPosition()).recipeID, classNum);
                 }
             });
 
@@ -82,16 +81,11 @@ public class RecipeRecyclerAdapter extends RecyclerView.Adapter<RecipeRecyclerAd
     public void onBindViewHolder(@NonNull RecipeRecyclerAdapter.Holder holder, final int position) {
         holder.title.setText(list.get(position).title);
         holder.author.setText("by " + list.get(position).author);
-        holder.cat1.setText(list.get(position).cat1);
-        holder.cat2.setText(list.get(position).cat2);
+        holder.cat1.setText(list.get(position).className);
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
-
-        String ingredient = list.get(position).ingredientList;
-        ingredient = ingredient.replace("]", "");
-        ingredient = ingredient.replace("[", "");
-        ingredient = ingredient.replace("'", "");
-        holder.ingredient.setText(ingredient);
+        holder.ingredient.setText(list.get(position).ingredientList);
+        holder.classNum = list.get(position).classNum;
 
         Glide.with(context).load(list.get(position).photo).into(holder.recipeImage);
 

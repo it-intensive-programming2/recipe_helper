@@ -28,6 +28,7 @@ public class WebViewFragment extends Fragment {
 
     private static final String TAG = WebViewFragment.class.getName();
     private String recipeID;
+    private int recipeClass;
 
     private ImageView scrap_star;
     private LinearLayout ll_1;
@@ -36,8 +37,9 @@ public class WebViewFragment extends Fragment {
     private UserInfo user;
     private boolean isScrap = false;
 
-    public WebViewFragment(String recipeID) {
+    public WebViewFragment(String recipeID, int recipeClass) {
         this.recipeID = recipeID;
+        this.recipeClass = recipeClass;
     }
 
     @Nullable
@@ -70,7 +72,14 @@ public class WebViewFragment extends Fragment {
         ll_3 = view.findViewById(R.id.ll_3);
         scrap_star = view.findViewById(R.id.scrap_star);
 
-        scrap_star.setOnClickListener(new View.OnClickListener() {
+        ll_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).onBackPressed();
+            }
+        });
+
+        ll_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isScrap) {
@@ -83,8 +92,29 @@ public class WebViewFragment extends Fragment {
                 setScrap(Integer.parseInt(recipeID));
             }
         });
-
+        addHistory(Integer.parseInt(recipeID), recipeClass);
         return view;
+    }
+
+    private void addHistory(int recipeID, int recipeClass) {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<BaseResponse> call = service.addHistory(user.userID, recipeID, recipeClass);
+
+        call.enqueue(new retrofit2.Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, retrofit2.Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    BaseResponse result = response.body();
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
 

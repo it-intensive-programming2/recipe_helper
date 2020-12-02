@@ -28,7 +28,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int recipeID);
+        void onItemSelected(View v, int recipeID, int classNum);
     }
 
     @NonNull
@@ -49,10 +49,12 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         protected TextView title1;
         protected ImageView image1;
         protected int recipeID1;
+        protected int recipeClass1;
 
         protected TextView title2;
         protected ImageView image2;
         protected int recipeID2;
+        protected int recipeClass2;
 
         public Holder(View view) {
             super(view);
@@ -64,14 +66,14 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             image1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, recipeID1);
+                    mListener.onItemSelected(v, recipeID1, recipeClass1);
                 }
             });
 
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, recipeID2);
+                    mListener.onItemSelected(v, recipeID2, recipeClass2);
                 }
             });
         }
@@ -87,6 +89,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
         holder.recipeID1 = list.get(position).recipe1.recipeID;
         holder.recipeID2 = list.get(position).recipe2.recipeID;
+
+        holder.recipeClass1 = list.get(position).recipe1.classNum;
+        holder.recipeClass2 = list.get(position).recipe2.classNum;
 
         holder.itemView.setTag(position);
     }

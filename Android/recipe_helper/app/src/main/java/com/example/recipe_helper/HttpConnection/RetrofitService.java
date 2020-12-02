@@ -51,13 +51,13 @@ public interface RetrofitService {
     Call<RecipeResponse> loadHotRecipe();
 
     @GET("recipe/loadRecommendRecipe1")
-    Call<RecipeResponse> loadRecommendRecipe1();
+    Call<RecipeResponse> loadRecommendRecipe1(@Query("userID") long userID);
 
     @GET("recipe/loadRecommendRecipe2")
-    Call<RecipeResponse> loadRecommendRecipe2();
+    Call<RecipeResponse> loadRecommendRecipe2(@Query("userID") long userID);
 
     @GET("recipe/loadRecommendRecipe3")
-    Call<RecipeResponse> loadRecommendRecipe3();
+    Call<RecipeResponse> loadRecommendRecipe3(@Query("userID") long userID);
 
     @GET("recipe/loadTasteRecipe")
     Call<RecipeResponse> loadTasteRecipe();
@@ -73,4 +73,7 @@ public interface RetrofitService {
 
     @GET("recipe/changeUserInfo")
     Call<UserInfoResponse> changeUserInfo(@Query("userID") long userID, @Query("allergy") String allergy, @Query("disease") String disease);
+
+    @GET("recipe/addHistory")
+    Call<BaseResponse> addHistory(@Query("userID") long userID, @Query("recipeID") int recipeID, @Query("recipeClass") int recipeClass);
 }

@@ -56,6 +56,8 @@ public class SignUp2 extends Fragment implements TasteAdapter.OnListItemSelected
     private RecyclerView recyclerView;
     private ArrayList<RecipeData> list = new ArrayList<>();
     private ArrayList<String> selectList = new ArrayList<>();
+    private ArrayList<Integer> selectClassList = new ArrayList<>();
+
 
     public SignUp2(UserInfo user, String allergyInfo, String diseaseInfo) {
         this.user = user;
@@ -106,7 +108,8 @@ public class SignUp2 extends Fragment implements TasteAdapter.OnListItemSelected
         paramObject.addProperty("profileUrl", user.profileUrl);
         paramObject.addProperty("allergy", allergyInfo);
         paramObject.addProperty("disease", diseaseInfo);
-        paramObject.addProperty("SelectList", selectList.toString().replaceAll("[^0-9 ]", ""));
+        paramObject.addProperty("selectList", selectList.toString().replaceAll("[^0-9 ]", ""));
+        paramObject.addProperty("selectClassList", selectClassList.toString().replaceAll("[^0-9 ]", ""));
 
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
         Call<BaseResponse> call = service.signUp(paramObject);
@@ -192,17 +195,19 @@ public class SignUp2 extends Fragment implements TasteAdapter.OnListItemSelected
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onItemSelected(View v, int recipeID, int position) {
+    public void onItemSelected(View v, int recipeID, int classNum, int position) {
         final TasteAdapter.Holder holder = (TasteAdapter.Holder) recyclerView.findViewHolderForAdapterPosition(position);
         if (holder.isChecked) {
             cnt--;
             holder.image.setForeground(getResources().getDrawable(R.drawable.transparent));
             selectList.remove(String.valueOf(recipeID));
+            selectClassList.remove(classNum);
             holder.isChecked = false;
         } else {
             cnt++;
             holder.image.setForeground(getResources().getDrawable(ic_image_check));
             selectList.add(String.valueOf(recipeID));
+            selectClassList.add(classNum);
             holder.isChecked = true;
         }
         progressBar.setProgress(cnt);
@@ -223,13 +228,13 @@ public class SignUp2 extends Fragment implements TasteAdapter.OnListItemSelected
             ment.setText("30개 평가가 눈앞이에요");
         } else if (cnt > 20) {
             progressBar.setMax(25);
-            ment.setText("아하 이런 스타일씩이군요!");
+            ment.setText("아하 이런 스타일이시군요!");
         } else if (cnt > 13) {
             progressBar.setMax(20);
             ment.setText("어떤 음식을 좋아하실지 조금씩 감이 와요");
         } else if (cnt > 10) {
             progressBar.setMax(15);
-            ment.setText("더 하시기로 마음 먹어셨군요! 좋아요:)");
+            ment.setText("더 하시기로 마음 먹으셨군요! 좋아요:)");
         } else if (cnt == 10) {
             ment.setText("10개 달성! 더 평가하면 추천이 더욱 좋아져요");
         }

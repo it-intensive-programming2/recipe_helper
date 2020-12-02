@@ -2,8 +2,8 @@ package com.example.recipe_helper.DataFrame;
 
 public class RecipeData {
     public int recipeID;
-    public String cat1;
-    public String cat2;
+    public int classNum;
+    public String className;
     public String title;
     public String ingredientList;
     public String level;

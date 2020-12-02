@@ -60,12 +60,12 @@ public class Scrap extends Fragment implements ScrapRecyclerViewAdapter.OnListIt
     }
 
     @Override
-    public void onItemSelected2(View v, int recipeID) {
-        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID)));
+    public void onItemSelected2(View v, int recipeID, int classNum) {
+        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID), classNum));
     }
 
     @Override
-    public void onItemSelected(View v, int position, int recipeID) {
+    public void onItemSelected(View v, int position, int recipeID, int classNum) {
         ScrapRecyclerViewAdapter.Holder holder = (ScrapRecyclerViewAdapter.Holder) recyclerView.findViewHolderForAdapterPosition(position);
         if (holder.isChecked) {
             holder.scrapStar.setBackgroundResource(R.drawable.ic_icon_before_scrap);

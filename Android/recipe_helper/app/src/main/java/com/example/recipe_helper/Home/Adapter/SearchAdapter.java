@@ -28,7 +28,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Holder> {
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int recipeID);
+        void onItemSelected(View v, int recipeID, int classNum);
     }
 
     @NonNull
@@ -57,14 +57,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.Holder> {
             recipe_name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onItemSelected(view, list.get(getAdapterPosition()).recipeID);
+                    mListener.onItemSelected(view, list.get(getAdapterPosition()).recipeID, list.get(getAdapterPosition()).classNum);
                 }
             });
 
             recipe_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onItemSelected(view, list.get(getAdapterPosition()).recipeID);
+                    mListener.onItemSelected(view, list.get(getAdapterPosition()).recipeID, list.get(getAdapterPosition()).classNum);
                 }
             });
 

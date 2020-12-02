@@ -28,9 +28,9 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected2(View v, int recipeID);
+        void onItemSelected2(View v, int recipeID, int classNum);
 
-        void onItemSelected(View v, int position, int recipeID);
+        void onItemSelected(View v, int position, int recipeID, int classNum);
     }
 
     @NonNull
@@ -77,14 +77,14 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
             recipeImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected2(v, list.get(getAdapterPosition()).recipeID);
+                    mListener.onItemSelected2(v, list.get(getAdapterPosition()).recipeID, list.get(getAdapterPosition()).classNum);
                 }
             });
 
             scrapStar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, getAdapterPosition(), list.get(getAdapterPosition()).recipeID);
+                    mListener.onItemSelected(v, getAdapterPosition(), list.get(getAdapterPosition()).recipeID, list.get(getAdapterPosition()).classNum);
                 }
             });
 
@@ -95,8 +95,7 @@ public class ScrapRecyclerViewAdapter extends RecyclerView.Adapter<ScrapRecycler
     public void onBindViewHolder(@NonNull Holder holder, final int position) {
         holder.title.setText(list.get(position).title);
         holder.author.setText("by " + list.get(position).author);
-        holder.cat1.setText(list.get(position).cat1);
-        holder.cat2.setText(list.get(position).cat2);
+        holder.cat1.setText(list.get(position).className);
         holder.time.setText(list.get(position).time);
         holder.level.setText(list.get(position).level);
         holder.isChecked = true;

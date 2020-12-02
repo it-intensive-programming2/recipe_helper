@@ -134,11 +134,11 @@ public class Search extends Fragment implements SearchAdapter.OnListItemSelected
     }
 
     @Override
-    public void onItemSelected(View v, int recipeID) {
+    public void onItemSelected(View v, int recipeID, int classNum) {
         InputMethodManager imm = (InputMethodManager) ((MainActivity) getActivity()).getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
 
-        replaceSearchFragment(new WebViewFragment(String.valueOf(recipeID)));
+        replaceSearchFragment(new WebViewFragment(String.valueOf(recipeID),classNum));
 
         et_input.clearFocus();
     }

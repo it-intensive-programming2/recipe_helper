@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.recipe_helper.DataFrame.RecipeData;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
+import com.example.recipe_helper.DataFrame.UserInfo;
 import com.example.recipe_helper.Home.Adapter.HomeRecyclerViewAdapter;
 import com.example.recipe_helper.Home.Adapter.ViewPageAdapter;
 import com.example.recipe_helper.Home.Dataframe.DoubleHomeRecipeFrame;
@@ -26,6 +27,7 @@ import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 import com.google.android.material.tabs.TabLayout;
+import com.kakao.usermgmt.response.model.User;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,8 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
     private ArrayList<RecipeData> list2 = new ArrayList<>();
     private ArrayList<DoubleHomeRecipeFrame> dList2 = new ArrayList<>();
 
+    private UserInfo user;
+
     private int list1_index = 2;
     private int list2_index = 2;
 
@@ -52,6 +56,8 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home, container, false);
         view.setClickable(true);
+
+        user = ((MainActivity) getActivity()).user;
 
         dList1.clear();
         dList2.clear();
@@ -175,7 +181,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
 
     private void loadRecommendRecipe1() {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<RecipeResponse> call = service.loadRecommendRecipe1();
+        Call<RecipeResponse> call = service.loadRecommendRecipe1(user.userID);
 
         call.enqueue(new retrofit2.Callback<RecipeResponse>() {
             @Override
@@ -200,7 +206,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
 
     private void loadRecommendRecipe2() {
         RetrofitService service = RetrofitAdapter.getInstance(getContext());
-        Call<RecipeResponse> call = service.loadRecommendRecipe2();
+        Call<RecipeResponse> call = service.loadRecommendRecipe2(user.userID);
 
         call.enqueue(new retrofit2.Callback<RecipeResponse>() {
             @Override
@@ -224,7 +230,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
     }
 
     @Override
-    public void onItemSelected(View v, int recipeID) {
-        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID)));
+    public void onItemSelected(View v, int recipeID, int classNum) {
+        ((MainActivity) getActivity()).replaceFragmentFull(new WebViewFragment(String.valueOf(recipeID), classNum));
     }
 }

@@ -28,7 +28,7 @@ public class TasteAdapter extends RecyclerView.Adapter<TasteAdapter.Holder> {
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int recipeID, int position);
+        void onItemSelected(View v, int recipeID, int classNum, int position);
     }
 
     @NonNull
@@ -49,6 +49,7 @@ public class TasteAdapter extends RecyclerView.Adapter<TasteAdapter.Holder> {
         protected TextView title;
         protected ImageView image;
         protected int recipeID;
+        protected int classNum;
         protected boolean isChecked;
 
         public Holder(View view) {
@@ -59,7 +60,7 @@ public class TasteAdapter extends RecyclerView.Adapter<TasteAdapter.Holder> {
             image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onItemSelected(v, recipeID, getAdapterPosition());
+                    mListener.onItemSelected(v, recipeID, classNum, getAdapterPosition());
                 }
             });
         }
@@ -71,6 +72,7 @@ public class TasteAdapter extends RecyclerView.Adapter<TasteAdapter.Holder> {
         Glide.with(context).load(list.get(position).photo).into(holder.image);
         holder.recipeID = list.get(position).recipeID;
         holder.isChecked = false;
+        holder.classNum = list.get(position).classNum;
 
         holder.itemView.setTag(position);
     }
