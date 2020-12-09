@@ -45,7 +45,7 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
 
         none_feed = view.findViewById(R.id.none_feed);
 
-        adapter = new PostAdapter(getContext(), post_list, this, this);
+        adapter = new PostAdapter(getContext(), post_list, this);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.community_recycler);
         recyclerView.setHasFixedSize(true);
 

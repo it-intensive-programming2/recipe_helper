@@ -26,7 +26,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private Context context;
     private OnListItemSelectedInterface mListener;
 
-    public PostAdapter(Context context, ArrayList<Post> list, OnListItemSelectedInterface mlistener, OnListItemSelectedInterface plistener) {
+    public PostAdapter(Context context, ArrayList<Post> list, OnListItemSelectedInterface mlistener) {
 
         this.post_list = list;
         this.context = context;
@@ -51,6 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         protected ImageView heart;
         protected ImageView balloon;
         protected ImageView background;
+        protected View tmp;
         protected ViewPager2 viewPager2;
         protected PostImageAdapter adapter;
 
@@ -69,6 +70,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             this.extend_comment = (TextView) itemView.findViewById(R.id.extend_comment);
             this.background = (ImageView) itemView.findViewById((R.id.background));
             this.viewPager2 = itemView.findViewById(R.id.view_pager2);
+            this.tmp = itemView.findViewById(R.id.tmp);
         }
 
 
@@ -130,9 +132,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.heart_cnt.setText(String.valueOf(post_list.get(position).getHeart()));
 
         //Viewpager
-        holder.adapter = new PostImageAdapter(post_list.get(position).getImages());
-        holder.viewPager2.setId(position + 1);
-        holder.viewPager2.setAdapter(holder.adapter);
+        if (post_list.get(position).getImages().size() == 0) {
+            holder.viewPager2.setVisibility(View.GONE);
+            holder.tmp.setVisibility(View.GONE);
+        } else {
+            holder.adapter = new PostImageAdapter(post_list.get(position).getImages());
+            holder.viewPager2.setId(position + 1);
+            holder.viewPager2.setAdapter(holder.adapter);
+        }
     }
 
     @Override
