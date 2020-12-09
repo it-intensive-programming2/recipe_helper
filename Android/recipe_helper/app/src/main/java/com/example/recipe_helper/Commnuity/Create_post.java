@@ -95,6 +95,8 @@ public class Create_post extends Fragment implements AddImageAdapter.OnListItemS
         imageAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imm.hideSoftInputFromWindow(tv_content.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(tv_title.getWindowToken(), 0);
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 photoPickerIntent.setType("image/*");
@@ -104,6 +106,7 @@ public class Create_post extends Fragment implements AddImageAdapter.OnListItemS
 
         list.clear();
         adapter = new AddImageAdapter(getContext(), list, this);
+        adapter.setHasStableIds(true);
         RecyclerView recyclerView = view.findViewById(R.id.rv_image);
         recyclerView.setHasFixedSize(true);
 
@@ -238,7 +241,6 @@ public class Create_post extends Fragment implements AddImageAdapter.OnListItemS
                 image = Bitmap.createScaledBitmap(image, 480, 480, true);
 
                 list.add(image);
-
                 adapter.notifyDataSetChanged();
             } catch (IOException e) {
                 e.printStackTrace();
