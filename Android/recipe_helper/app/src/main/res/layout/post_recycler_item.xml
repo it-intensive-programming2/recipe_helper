@@ -11,7 +11,8 @@
         android:layout_height="match_parent"
         android:paddingVertical="5dp"
         android:text="Title"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <View
         android:id="@+id/tmp"
