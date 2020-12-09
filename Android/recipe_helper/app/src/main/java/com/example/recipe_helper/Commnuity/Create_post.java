@@ -21,8 +21,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,14 +55,14 @@ import retrofit2.Call;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-public class Create_post extends Fragment {
+public class Create_post extends Fragment implements AddImageAdapter.OnListItemSelectedInterface {
 
     private EditText tv_title;
     private EditText tv_content;
     private static final String TAG = "RHC";
     private InputMethodManager imm;
     private UserInfo user;
-    private Button imageAdd;
+    private ImageButton imageAdd;
 
     private ArrayList<Bitmap> list = new ArrayList<>();
     private AddImageAdapter adapter;
@@ -103,7 +103,7 @@ public class Create_post extends Fragment {
         });
 
         list.clear();
-        adapter = new AddImageAdapter(getContext(), list);
+        adapter = new AddImageAdapter(getContext(), list, this);
         RecyclerView recyclerView = view.findViewById(R.id.rv_image);
         recyclerView.setHasFixedSize(true);
 
@@ -352,5 +352,11 @@ public class Create_post extends Fragment {
         }
 
         return null;
+    }
+
+    @Override
+    public void onItemSelected(View v, int position) {
+        list.remove(position);
+        adapter.notifyItemRemoved(position);
     }
 }

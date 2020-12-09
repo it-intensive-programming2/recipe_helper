@@ -18,14 +18,16 @@ import java.util.ArrayList;
 public class AddImageAdapter extends RecyclerView.Adapter<AddImageAdapter.Holder> {
     private ArrayList<Bitmap> list;
     private Context context;
+    private OnListItemSelectedInterface mListener;
 
-    public AddImageAdapter(Context context, ArrayList<Bitmap> list) {
+    public AddImageAdapter(Context context, ArrayList<Bitmap> list, OnListItemSelectedInterface mListener) {
         this.context = context;
         this.list = list;
+        this.mListener = mListener;
     }
 
     public interface OnListItemSelectedInterface {
-        void onItemSelected(View v, int recipeID, int classNum);
+        void onItemSelected(View v, int position);
     }
 
     @NonNull
@@ -48,7 +50,13 @@ public class AddImageAdapter extends RecyclerView.Adapter<AddImageAdapter.Holder
         public Holder(View view) {
             super(view);
             this.photo = view.findViewById(R.id.photo);
-
+            photo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    mListener.onItemSelected(v, position);
+                }
+            });
         }
     }
 
