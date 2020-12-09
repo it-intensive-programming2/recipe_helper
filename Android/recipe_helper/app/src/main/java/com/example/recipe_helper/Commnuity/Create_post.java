@@ -361,4 +361,12 @@ public class Create_post extends Fragment implements AddImageAdapter.OnListItemS
         list.remove(position);
         adapter.notifyItemRemoved(position);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        imm.hideSoftInputFromWindow(tv_content.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(tv_title.getWindowToken(), 0);
+        ((MainActivity) getActivity()).setNavigationVisible(true);
+    }
 }

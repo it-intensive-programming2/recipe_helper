@@ -64,7 +64,7 @@
                 android:background="@null"
                 android:hint="제목"
                 android:padding="15dp"
-                android:textColor="#808080"
+                android:textColor="@color/black"
 
                 tools:ignore="NotSibling" />
         </androidx.cardview.widget.CardView>
@@ -73,6 +73,7 @@
             android:id="@+id/cardview_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:background="@color/white"
             android:minHeight="400dp"
             app:layout_constraintLeft_toLeftOf="parent"
