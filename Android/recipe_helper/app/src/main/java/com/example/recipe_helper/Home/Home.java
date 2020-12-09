@@ -123,7 +123,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
             @Override
             public void onClick(View v) {
                 dList1.add(new DoubleHomeRecipeFrame(list1.get(list1_index), list1.get(list1_index + 1)));
-                list1_index++;
+                list1_index += 2;
                 adapter1.notifyDataSetChanged();
                 if (dList1.size() > 2) {
                     btn_recommend1.setVisibility(View.GONE);
@@ -156,7 +156,7 @@ public class Home extends Fragment implements ViewPageAdapter.OnListItemSelected
             @Override
             public void onClick(View v) {
                 dList2.add(new DoubleHomeRecipeFrame(list2.get(list2_index), list2.get(list2_index + 1)));
-                list2_index++;
+                list2_index += 2;
                 adapter2.notifyDataSetChanged();
                 if (dList2.size() > 2) {
                     btn_recommend2.setVisibility(View.GONE);
