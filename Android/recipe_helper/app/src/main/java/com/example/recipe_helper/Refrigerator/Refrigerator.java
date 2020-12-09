@@ -192,7 +192,7 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
                     shimmerFrameLayout.setVisibility(View.GONE);
                     if (list.isEmpty()) {
                         btn_search.setVisibility(View.VISIBLE);
-                        btn_search.setText("검색되는 식재료가 없어요 ㅠ-ㅠ");
+                        btn_search.setText("다시 찾기");
                     } else {
                         result_text.setText(String.format("검색결과 %d개", list.size()));
                         if (result.delete_list.length() > 2) {
@@ -208,7 +208,7 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
                     shimmerFrameLayout.setVisibility(View.GONE);
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("ㅠ-ㅠ").setMessage("검색결과가 존재하지 않아요").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    builder.setTitle("서버 에러 ㅠ-ㅠ").setMessage("다시 시도해주세요!").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -227,7 +227,7 @@ public class Refrigerator extends Fragment implements RecipeRecyclerAdapter.OnLi
                 shimmerFrameLayout.setVisibility(View.GONE);
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("ㅠ-ㅠ").setMessage("검색결과가 존재하지 않아요").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                builder.setTitle("서버 에러 ㅠ-ㅠ").setMessage("다시 시도해주세요!").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
