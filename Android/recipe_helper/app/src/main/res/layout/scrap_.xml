@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
-            app:title="마이페이지" />
+            app:title="나의 요리책" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

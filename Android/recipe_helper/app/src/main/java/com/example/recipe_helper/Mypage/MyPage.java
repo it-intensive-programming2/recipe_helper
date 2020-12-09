@@ -3,10 +3,14 @@ package com.example.recipe_helper.Mypage;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +25,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.recipe_helper.Commnuity.DataFrame.Post;
+import com.example.recipe_helper.Commnuity.DataFrame.PostResponse;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
 import com.example.recipe_helper.DataFrame.UserInfo;
 import com.example.recipe_helper.DataFrame.UserInfoResponse;
@@ -30,6 +36,8 @@ import com.example.recipe_helper.HttpConnection.RetrofitService;
 import com.example.recipe_helper.MainActivity;
 import com.example.recipe_helper.R;
 import com.example.recipe_helper.databinding.MypageBinding;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 
@@ -41,6 +49,7 @@ public class MyPage extends Fragment {
     private ImageView iv;
     private ImageView iv2;
     private ImageView iv3;
+    private ImageView wordcloud;
     private TextView allergybox;
 
     private static final String[] allergy = {"계란", "우유", "밀", "갑각류", "생선", "호두", "돼지고기", "땅콩", "조개", "복숭아"};
@@ -64,6 +73,7 @@ public class MyPage extends Fragment {
         allergybox = view.findViewById(R.id.allergybox);
         TextView favor_user_name = view.findViewById(R.id.mypage_user_id);
         Button edit_btn = view.findViewById(R.id.editbutton);
+        wordcloud = view.findViewById(R.id.wordcloud);
 
         for (int i = 0; i < user.allergy.length(); i++)
             if (user.allergy.charAt(i) == '1') cur_user_allergy_info[i] = true;
@@ -162,7 +172,6 @@ public class MyPage extends Fragment {
             }
         });
 
-
         return view;
     }
 
@@ -200,5 +209,4 @@ public class MyPage extends Fragment {
         if (allergy_info.trim().length() == 0) allergy_info = "알레르기가 없습니다.";
         allergybox.setText(allergy_info);
     }
-
 }

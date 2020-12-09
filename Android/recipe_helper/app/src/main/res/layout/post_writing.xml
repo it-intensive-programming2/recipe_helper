@@ -61,6 +61,7 @@
                 android:id="@+id/post_enter_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:hint="제목"
                 android:padding="15dp"
                 android:textColor="#808080"
@@ -72,7 +73,7 @@
             android:id="@+id/cardview_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:background="@color/white"
             android:minHeight="400dp"
             app:cardCornerRadius="10dp"
@@ -81,7 +82,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_post"
+            app:layout_constraintTop_toBottomOf="@id/rv_image"
             tools:ignore="MissingConstraints">
 
             <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -96,11 +97,27 @@
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:hint="당신의 이야기를 들려주세요:)"
+                    android:minHeight="400dp"
                     android:padding="15dp"
                     tools:ignore="NotSibling" />
             </ScrollView>
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:id="@+id/add_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="ImageButton"
+            app:layout_constraintTop_toBottomOf="@id/user_post" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/add_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

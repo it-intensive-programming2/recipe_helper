@@ -11,13 +11,13 @@
         android:id="@+id/item_fridge"
         android:enabled="true"
         android:icon="@drawable/ic_fridge"
-        android:title="나의 냉장고" />
+        android:title="냉장고" />
 
     <item
         android:id="@+id/item_scrap"
         android:enabled="true"
         android:icon="@drawable/ic_scrap"
-        android:title="스크랩" />
+        android:title="요리책" />
 
     <item
         android:id="@+id/item_community_main"

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.devs.readmoreoption.ReadMoreOption;
@@ -46,10 +47,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         protected TextView extend_comment;
         protected TextView heart_cnt;
         protected TextView comment_cnt;
-        protected ImageView post_pics;
+        protected ImageView user_profile;
         protected ImageView heart;
         protected ImageView balloon;
         protected ImageView background;
+        protected ViewPager2 viewPager2;
+        protected PostImageAdapter adapter;
+
         protected int postID;
 
         public PostViewHolder(@NonNull View itemView) {
@@ -59,11 +63,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             this.post_content = (TextView) itemView.findViewById(R.id.post_content);
             this.heart_cnt = (TextView) itemView.findViewById(R.id.heart_cnt);
             this.comment_cnt = (TextView) itemView.findViewById(R.id.comment_cnt);
-            this.post_pics = (ImageView) itemView.findViewById(R.id.post_pic);
+            this.user_profile = (ImageView) itemView.findViewById(R.id.user_profile);
             this.heart = (ImageView) itemView.findViewById(R.id.heart);
             this.balloon = (ImageView) itemView.findViewById(R.id.go_comment);
             this.extend_comment = (TextView) itemView.findViewById(R.id.extend_comment);
             this.background = (ImageView) itemView.findViewById((R.id.background));
+            this.viewPager2 = itemView.findViewById(R.id.view_pager2);
         }
 
 
@@ -72,7 +77,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.post_recycler_item, parent, false);
 
@@ -92,7 +96,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 .labelUnderLine(false)
                 .expandAnimation(true)
                 .build();
-        Glide.with(context).load(post_list.get(position).getWriterProfileUrl()).into(holder.post_pics);
+
+
+        Glide.with(context).load(post_list.get(position).getWriterProfileUrl()).circleCrop().into(holder.user_profile);
 
         holder.post_user_id.setText(post_list.get(position).getWriterNickname());
         holder.post_title.setText(post_list.get(position).getTitle());
@@ -122,6 +128,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.comment_cnt.setText(String.valueOf(post_list.get(position).getComment()));
         holder.heart_cnt.setText(String.valueOf(post_list.get(position).getHeart()));
+
+        //Viewpager
+        holder.adapter = new PostImageAdapter(post_list.get(position).getImages());
+        holder.viewPager2.setId(position + 1);
+        holder.viewPager2.setAdapter(holder.adapter);
     }
 
     @Override

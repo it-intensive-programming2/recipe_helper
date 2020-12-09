@@ -1,5 +1,7 @@
 package com.example.recipe_helper.Commnuity.DataFrame;
 
+import java.util.ArrayList;
+
 public class Post {
     private String writerNickname;
     private String title;
@@ -8,6 +10,19 @@ public class Post {
     private int comment;
     private int postID;
     private String content;
+    private ArrayList<String> images;
+
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
+
+    public ArrayList<String> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<String> images) {
+        this.images = images;
+    }
 
     public Post(String writerNickname, String title, String writerProfileUrl, int heart, int comment, int postID, String content) {
         this.writerNickname = writerNickname;

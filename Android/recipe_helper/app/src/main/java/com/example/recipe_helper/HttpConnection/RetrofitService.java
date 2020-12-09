@@ -8,10 +8,16 @@ import com.example.recipe_helper.DataFrame.RecipeResponse2;
 import com.example.recipe_helper.DataFrame.UserInfoResponse;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
@@ -77,4 +83,11 @@ public interface RetrofitService {
 
     @GET("recipe/addHistory")
     Call<BaseResponse> addHistory(@Query("userID") long userID, @Query("recipeID") int recipeID, @Query("recipeClass") int recipeClass);
+
+    @GET("recipe/testPullPost")
+    Call<PostResponse> testPullPost();
+
+    @Multipart
+    @POST("recipe/uploadPost2")
+    Call<BaseResponse> uploadPost2(@Part ArrayList<MultipartBody.Part> images, @Part("userID") RequestBody userID, @Part("title") RequestBody title, @Part("content") RequestBody content);
 }

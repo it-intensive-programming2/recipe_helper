@@ -89,6 +89,8 @@ public class Search extends Fragment implements SearchAdapter.OnListItemSelected
         search_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) ((MainActivity) getActivity()).getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
                 ((MainActivity) getActivity()).replaceFragmentFull(new SearchFragment(et_input.getText().toString(), list));
             }
         });
@@ -138,7 +140,7 @@ public class Search extends Fragment implements SearchAdapter.OnListItemSelected
         InputMethodManager imm = (InputMethodManager) ((MainActivity) getActivity()).getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(et_input.getWindowToken(), 0);
 
-        replaceSearchFragment(new WebViewFragment(String.valueOf(recipeID),classNum));
+        replaceSearchFragment(new WebViewFragment(String.valueOf(recipeID), classNum));
 
         et_input.clearFocus();
     }
