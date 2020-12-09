@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\mangu\\Desktop\\HCI_project\\Android\\recipe_helper\\key\\reicpe_helper_key.jks')
+            storePassword 'fptlvlgpfvj1234'
+            keyAlias 'recipeHelperKey'
+            keyPassword 'fptlvlgpfvj1234'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -18,6 +26,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     buildFeatures {

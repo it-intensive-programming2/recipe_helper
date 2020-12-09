@@ -33,6 +33,7 @@ import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.exception.KakaoException;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class StartActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
@@ -70,7 +71,7 @@ public class StartActivity extends AppCompatActivity {
             setContentView(R.layout.login);
             Log.d("RHC", "Session not checked");
         }
-        getAppKeyHash();
+//        getAppKeyHash();
     }
 
     @Override
@@ -169,7 +170,7 @@ public class StartActivity extends AppCompatActivity {
                 md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String hash_key = new String(Base64.encode(md.digest(), 0));
-                Log.d("HASH", "getAppKeyHash: " + hash_key);
+                Log.d("HASH", hash_key);
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
