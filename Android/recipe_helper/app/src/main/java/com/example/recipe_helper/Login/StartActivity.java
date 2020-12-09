@@ -33,7 +33,6 @@ import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.exception.KakaoException;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class StartActivity extends AppCompatActivity {
     private SessionCallback sessionCallback;
@@ -41,6 +40,7 @@ public class StartActivity extends AppCompatActivity {
 
     private Intent intent;
     private UserInfo user;
+    private boolean isnull;
 
 
     @Override
@@ -133,12 +133,18 @@ public class StartActivity extends AppCompatActivity {
                     String genderStr;
                     String ageStr;
                     // 성별 또는 나이 정보가 누락된 경우
-                    if (gender == null || ageRange == null) {
-                        ageStr = genderStr = "";
-                    } else {
+                    if (gender == null || ageRange == null)
+                        isnull = true;
+
+                    if (gender == null)
+                        genderStr = "female";
+                    else
                         genderStr = kakaoAccount.getGender().getValue();
+
+                    if (ageRange == null)
+                        ageStr = "20~29";
+                    else
                         ageStr = kakaoAccount.getAgeRange().getValue();
-                    }
 
                     if (profileImageUrl == null) {
                         profileImageUrl = "";
@@ -151,7 +157,7 @@ public class StartActivity extends AppCompatActivity {
                         intent.putExtra("OBJECT", user);
                         startActivity(intent);
                         finish();
-                    } else replaceFragmentFull(new SignUp1(user, 1));
+                    } else replaceFragmentFull(new SignUp1(user, 1, isnull));
                 }
             });
         }

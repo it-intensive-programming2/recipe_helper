@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     UserInfoResponse result = response.body();
                     if (result.checkError(getApplicationContext()) == 3) {
                         Log.d("RHC", "not registerd");
-                        replaceSignUp(new SignUp1(user, 0));
+                        replaceSignUp(new SignUp1(user, 0, false));
                     }
                     user = result.body;
                 } else {
