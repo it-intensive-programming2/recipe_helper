@@ -1,10 +1,13 @@
 package com.example.recipe_helper.Home;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.recipe_helper.DataFrame.UserInfo;
+import com.example.recipe_helper.Home.Dataframe.NutritionData;
+import com.example.recipe_helper.Home.Dataframe.NutritionResponse;
 import com.example.recipe_helper.HttpConnection.BaseResponse;
 import com.example.recipe_helper.HttpConnection.RetrofitAdapter;
 import com.example.recipe_helper.HttpConnection.RetrofitService;
@@ -67,6 +72,8 @@ public class WebViewFragment extends Fragment {
 
         mWebView.loadUrl("https://www.10000recipe.com/recipe/" + recipeID); // 웹뷰에 표시할 웹사이트 주소, 웹뷰 시작
 
+        addHistory(Integer.parseInt(recipeID), recipeClass);
+
         ll_1 = view.findViewById(R.id.ll_1);
         ll_2 = view.findViewById(R.id.ll_2);
         ll_3 = view.findViewById(R.id.ll_3);
@@ -92,7 +99,13 @@ public class WebViewFragment extends Fragment {
                 setScrap(Integer.parseInt(recipeID));
             }
         });
-        addHistory(Integer.parseInt(recipeID), recipeClass);
+
+        ll_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getCalories();
+            }
+        });
         return view;
     }
 
@@ -160,6 +173,48 @@ public class WebViewFragment extends Fragment {
 
             @Override
             public void onFailure(Call<BaseResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    private void getCalories() {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<NutritionResponse> call = service.getCalories(recipeID, user.ageRange, user.gender);
+
+        call.enqueue(new retrofit2.Callback<NutritionResponse>() {
+            @Override
+            public void onResponse(Call<NutritionResponse> call, retrofit2.Response<NutritionResponse> response) {
+                if (response.isSuccessful()) {
+                    NutritionResponse result = response.body();
+
+                    NutritionData data = result.body;
+
+                    Log.d(TAG, "onResponse: " + data.calories + data.carbs + data.protein + data.fat);
+
+                    Dialog dialog = new NutritionDialog(getContext(), data.calories, data.carbs, data.protein, data.fat);
+                    dialog.setCanceledOnTouchOutside(true);
+                    dialog.setCancelable(true);
+
+                    DisplayMetrics dm = getActivity().getResources().getDisplayMetrics(); //디바이스 화면크기를 구하기위해
+                    final int width = dm.widthPixels; //디바이스 화면 너비
+                    final int height = dm.heightPixels; //디바이스 화면 높이
+
+                    dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+                    WindowManager.LayoutParams wm = dialog.getWindow().getAttributes();  //다이얼로그의 높이 너비 설정하기위해
+                    wm.copyFrom(dialog.getWindow().getAttributes());  //여기서 설정한값을 그대로 다이얼로그에 넣겠다는의미
+                    wm.width = (int) (width * 0.9);  //화면 너비의 절반
+                    wm.height = height / 2;  //화면 높이의 절반
+
+                    dialog.show();
+
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NutritionResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

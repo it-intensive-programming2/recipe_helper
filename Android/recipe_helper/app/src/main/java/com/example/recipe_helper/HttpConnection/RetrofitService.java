@@ -6,6 +6,7 @@ import com.example.recipe_helper.DataFrame.IngredientResponse;
 import com.example.recipe_helper.DataFrame.RecipeResponse;
 import com.example.recipe_helper.DataFrame.RecipeResponse2;
 import com.example.recipe_helper.DataFrame.UserInfoResponse;
+import com.example.recipe_helper.Home.Dataframe.NutritionResponse;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -84,8 +85,8 @@ public interface RetrofitService {
     @GET("recipe/addHistory")
     Call<BaseResponse> addHistory(@Query("userID") long userID, @Query("recipeID") int recipeID, @Query("recipeClass") int recipeClass);
 
-    @GET("recipe/testPullPost")
-    Call<PostResponse> testPullPost();
+    @GET("recipe/getCalories")
+    Call<NutritionResponse> getCalories(@Query("recipeID") String recipeID, @Query("userAgeRange") String userAgeRange, @Query("userGender") String userGender);
 
     @Multipart
     @POST("recipe/uploadPost2")
