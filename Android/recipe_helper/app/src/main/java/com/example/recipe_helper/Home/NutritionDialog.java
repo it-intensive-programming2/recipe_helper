@@ -33,17 +33,13 @@ public class NutritionDialog extends Dialog {
     private TextView protein;
     private Button btn_ok;
 
-    private String calorieString;
-    private String carbsString;
-    private String proteinString;
-    private String fatString;
+    private final int recipeID;
+    private final UserInfo user;
 
-    public NutritionDialog(@NonNull Context context, String calorieString, String carbsString, String proteinString, String fatString) {
+    public NutritionDialog(@NonNull Context context, int recipeID, UserInfo user) {
         super(context);
-        this.calorieString = calorieString;
-        this.carbsString = carbsString;
-        this.proteinString = proteinString;
-        this.fatString = fatString;
+        this.recipeID = recipeID;
+        this.user = user;
     }
 
     @Override
@@ -58,11 +54,6 @@ public class NutritionDialog extends Dialog {
         protein = findViewById(R.id.protein);
         btn_ok = findViewById(R.id.btn_ok);
 
-        calorie.setText(calorieString.trim());
-        carbs.setText(carbsString.trim());
-        protein.setText(proteinString.trim());
-        fat.setText(fatString.trim());
-
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,5 +61,34 @@ public class NutritionDialog extends Dialog {
             }
         });
 
+        getCalories();
+    }
+
+    private void getCalories() {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<NutritionResponse> call = service.getCalories(recipeID, user.ageRange, user.gender);
+
+        call.enqueue(new retrofit2.Callback<NutritionResponse>() {
+            @Override
+            public void onResponse(Call<NutritionResponse> call, retrofit2.Response<NutritionResponse> response) {
+                if (response.isSuccessful()) {
+                    NutritionResponse result = response.body();
+                    NutritionData data = result.body;
+
+                    calorie.setText(data.calories);
+                    carbs.setText(data.carbs);
+                    protein.setText(data.protein);
+                    fat.setText(data.fat);
+
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NutritionResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 }

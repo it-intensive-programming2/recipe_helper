@@ -86,7 +86,7 @@ public interface RetrofitService {
     Call<BaseResponse> addHistory(@Query("userID") long userID, @Query("recipeID") int recipeID, @Query("recipeClass") int recipeClass);
 
     @GET("recipe/getCalories")
-    Call<NutritionResponse> getCalories(@Query("recipeID") String recipeID, @Query("userAgeRange") String userAgeRange, @Query("userGender") String userGender);
+    Call<NutritionResponse> getCalories(@Query("recipeID") int recipeID, @Query("userAgeRange") String userAgeRange, @Query("userGender") String userGender);
 
     @Multipart
     @POST("recipe/uploadPost2")
