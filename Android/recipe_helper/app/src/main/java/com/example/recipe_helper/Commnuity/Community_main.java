@@ -61,7 +61,7 @@ public class Community_main extends Fragment implements PostAdapter.OnListItemSe
         });
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.turquoise);
+        swipeRefreshLayout.setColorSchemeResources(R.color.turquoise, R.color.saffron, R.color.flame_scarlet, R.color.classic_blue);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
