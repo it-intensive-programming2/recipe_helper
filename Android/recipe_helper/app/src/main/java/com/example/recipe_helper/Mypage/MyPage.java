@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.recipe_helper.Commnuity.DataFrame.Post;
@@ -51,6 +52,7 @@ public class MyPage extends Fragment {
     private ImageView iv3;
     private ImageView wordcloud;
     private TextView allergybox;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private static final String[] allergy = {"계란", "우유", "밀", "갑각류", "생선", "호두", "돼지고기", "땅콩", "조개", "복숭아"};
     private UserInfo user;
@@ -74,6 +76,8 @@ public class MyPage extends Fragment {
         TextView favor_user_name = view.findViewById(R.id.mypage_user_id);
         Button edit_btn = view.findViewById(R.id.editbutton);
         wordcloud = view.findViewById(R.id.wordcloud);
+
+        getWordCloud(user.userID, "False");
 
         for (int i = 0; i < user.allergy.length(); i++)
             if (user.allergy.charAt(i) == '1') cur_user_allergy_info[i] = true;
@@ -172,6 +176,15 @@ public class MyPage extends Fragment {
             }
         });
 
+        swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.turquoise);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getWordCloud(user.userID, "True");
+            }
+        });
+
         return view;
     }
 
@@ -208,5 +221,35 @@ public class MyPage extends Fragment {
 
         if (allergy_info.trim().length() == 0) allergy_info = "알레르기가 없습니다.";
         allergybox.setText(allergy_info);
+    }
+
+    private void getWordCloud(long userID, String regenerate) {
+        RetrofitService service = RetrofitAdapter.getInstance(getContext());
+        Call<WordCloudResponse> call = service.getWordCloud(userID, regenerate);
+
+        call.enqueue(new retrofit2.Callback<WordCloudResponse>() {
+            @Override
+            public void onResponse(Call<WordCloudResponse> call, retrofit2.Response<WordCloudResponse> response) {
+                if (response.isSuccessful()) {
+                    WordCloudResponse result = response.body();
+                    if (!result.body.equals(""))
+                        wordcloud.setImageBitmap(getBitmapFromString(result.body));
+                    swipeRefreshLayout.setRefreshing(false);
+                } else {
+                    Log.d(TAG, "onResponse: Fail " + response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WordCloudResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+    }
+
+    public Bitmap getBitmapFromString(String stringPicture) {
+        byte[] decodedString = Base64.decode(stringPicture, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 }

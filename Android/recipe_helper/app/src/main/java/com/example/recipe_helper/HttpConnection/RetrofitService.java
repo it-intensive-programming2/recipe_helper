@@ -7,6 +7,7 @@ import com.example.recipe_helper.DataFrame.RecipeResponse;
 import com.example.recipe_helper.DataFrame.RecipeResponse2;
 import com.example.recipe_helper.DataFrame.UserInfoResponse;
 import com.example.recipe_helper.Home.Dataframe.NutritionResponse;
+import com.example.recipe_helper.Mypage.WordCloudResponse;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -91,4 +92,7 @@ public interface RetrofitService {
     @Multipart
     @POST("recipe/uploadPost2")
     Call<BaseResponse> uploadPost2(@Part ArrayList<MultipartBody.Part> images, @Part("userID") RequestBody userID, @Part("title") RequestBody title, @Part("content") RequestBody content);
+
+    @GET("recipe/getWordCloud")
+    Call<WordCloudResponse> getWordCloud(@Query("userID") long userID, @Query("regenerate") String regenerate);
 }
