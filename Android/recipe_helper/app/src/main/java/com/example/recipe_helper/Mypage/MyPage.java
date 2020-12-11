@@ -3,10 +3,12 @@ package com.example.recipe_helper.Mypage;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -182,6 +184,15 @@ public class MyPage extends Fragment {
             @Override
             public void onRefresh() {
                 getWordCloud(user.userID, "True");
+            }
+        });
+
+        TextView surveyText = view.findViewById(R.id.survey_text);
+        surveyText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://docs.google.com/forms/d/e/1FAIpQLSeHleBOC2YphlY2AhiRT0RZHWuf-E_ph8Ji_QUpJcYpLpY5_g/viewform?usp=sf_link"));
+                startActivity(intent);
             }
         });
 
