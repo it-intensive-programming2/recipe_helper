@@ -18,7 +18,8 @@
   <a href="#key-features">Key Features</a> • 
   <a href="#recommender-architecture">Recommender Architecture</a> • 
   <a href="#download">Download</a> •  
-  <a href="#credits">Credits</a>
+  <a href="#credits">Credits</a> •  
+  <a href="#license">License</a>
 </p>
 <p align="center">
    <img src=".docs/full_gif.gif" alt="recipe_helper"> 
@@ -67,6 +68,9 @@ Recipe Helper 은 아래의 오픈 소스를 사용하여 제작되었다.
 * [Glide](https://github.com/bumptech/glide)
 * [flexbox-layout](https://github.com/google/flexbox-layout)
 * [shimmer-android](https://github.com/facebook/shimmer-android)
+
+## License
+This application is freely available for free non-commercial use, and may be redistributed under these conditions. Please, see the [license](LICENSE) for further details.
 
 
 
