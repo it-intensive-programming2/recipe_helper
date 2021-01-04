@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.5"
+  
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - coverage run -m pytest
+ 
+env:
+  - CODECOV_TOKEN=2475c7b4-4236-48e4-b751-73dfd7eae874
+ 
+after_success:
+  - bash <(curl -s https://codecov.io/bash -t CODECOV_TOKEN)
+ 
+ 
